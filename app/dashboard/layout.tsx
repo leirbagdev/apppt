@@ -3,8 +3,8 @@
 import type React from "react"
 
 import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { Fragment, useState } from "react"
+import { usePathname, useRouter } from "next/navigation"
+import { Fragment, useState, useEffect } from "react"
 import { Dialog, Transition } from "@headlessui/react"
 import {
   Bars3Icon,
@@ -19,15 +19,13 @@ import {
   XMarkIcon,
   HeartIcon,
 } from "@heroicons/react/24/outline"
+import { supabase } from "../../lib/supabaseClient"
 
 const navigation = [
   { name: "Dashboard", href: "/dashboard", icon: HomeIcon },
   { name: "Alunos", href: "/dashboard/students", icon: UserIcon },
   { name: "Treinos", href: "/dashboard/workouts", icon: VideoCameraIcon },
-  { name: "Nutrição", href: "/dashboard/nutrition", icon: DocumentTextIcon },
-  { name: "Métricas de Saúde", href: "/dashboard/health-metrics", icon: HeartIcon },
   { name: "Agendamento", href: "/dashboard/schedule", icon: ClockIcon },
-  { name: "Progresso", href: "/dashboard/progress", icon: ChartBarIcon },
   { name: "Pagamentos", href: "/dashboard/payments", icon: CreditCardIcon },
 ]
 
@@ -39,6 +37,22 @@ const userNavigation = [
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const pathname = usePathname()
+  const router = useRouter()
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data }) => {
+      if (!data.user) {
+        router.push("/")
+      } else {
+        setLoading(false)
+      }
+    })
+  }, [router])
+
+  if (loading) {
+    return <div className="flex items-center justify-center h-screen">Carregando...</div>
+  }
 
   return (
     <div className="h-full bg-zinc-900 text-white">
@@ -269,9 +283,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                     ? "Alunos"
                     : pathname === "/dashboard/workouts"
                       ? "Treinos"
-                      : pathname === "/dashboard/nutrition"
-                        ? "Nutrição"
-                        : pathname === "/dashboard/health-metrics"
+                      : pathname === "/dashboard/health-metrics"
                           ? "Métricas de Saúde"
                           : pathname === "/dashboard/schedule"
                             ? "Agendamento"

@@ -9,57 +9,14 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ")
 }
 
-// Create a forwardRef wrapper for Tab.Group
-// const TabGroupWithRef = forwardRef((props, ref) => <Tab.Group {...props} ref={ref} />)
-// TabGroupWithRef.displayName = "TabGroupWithRef"
-
 export default function Dashboard() {
+
   const [categories] = useState({
     "Próximos Treinos": [
-      {
-        id: 1,
-        title: "Mariano - Musculação - Alternado por Segmento",
-        date: "Hoje, 18:00",
-        description: "Foco em peito, ombros e tríceps",
-        trainer: "Ricardo Almeida",
-      },
-      {
-        id: 2,
-        title: "Flávio - Musculação - MMSS/MMII",
-        date: "Amanhã, 07:30",
-        description: "Treino de alta intensidade para queima calórica",
-        trainer: "Carla Santos",
-      },
-      {
-        id: 3,
-        title: "Leonardo - Natação - Exercício Seco + Fundamentos I",
-        date: "Quinta, 18:00",
-        description: "Foco em técnica e respiração",
-        trainer: "Ricardo Almeida",
-      },
+      // Nenhum aluno fictício
     ],
     Lembretes: [
-      {
-        id: 1,
-        title: "Atualizar plano nutricional do Mariano",
-        date: "Até amanhã",
-        description: "Ajustar macros para fase de definição",
-        trainer: "Dra. Juliana Costa",
-      },
-      {
-        id: 2,
-        title: "Enviar protocolo de suplementação para Flávio",
-        date: "Hoje",
-        description: "Incluir recomendações para pré e pós-treino",
-        trainer: "Dra. Juliana Costa",
-      },
-      {
-        id: 3,
-        title: "Revisar dieta do Leonardo",
-        date: "Quinta-feira",
-        description: "Ajustar para competição de natação",
-        trainer: "Dra. Juliana Costa",
-      },
+      // Nenhum aluno fictício
     ],
     "Acompanhamento On-line": [
       {

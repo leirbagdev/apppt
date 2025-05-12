@@ -1,40 +1,55 @@
 "use client"
 
-import { useState } from "react"
+import { useState, Fragment, useRef } from "react"
 import Link from "next/link"
 import { UserIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline"
+import { Dialog, Transition } from "@headlessui/react"
 
 export default function StudentsPage() {
   const [searchTerm, setSearchTerm] = useState("")
-
-  const students = [
+  const [students, setStudents] = useState([
     {
       id: 1,
-      name: "Leandro Silva",
-      age: "36 anos",
+      name: "Gabriel Pereira",
+      age: "31 anos",
       modalities: ["Musculação"],
       status: "active",
-      startDate: "04/02/2025",
-    },
-    {
-      id: 2,
-      name: "Mario Lenon",
-      age: "51 anos",
-      modalities: ["Musculação", "Natação"],
-      status: "pending",
-      startDate: "15/11/2024",
-    },
-    {
-      id: 3,
-      name: "Otávio Martins",
-      age: "79 anos",
-      modalities: ["Musculação", "Fisioterapia"],
-      status: "active",
-      startDate: "19/05/2021",
-    },
-  ]
+      startDate: "01/03/2024",
+    }
+  ])
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [form, setForm] = useState({
+    name: "",
+    age: "",
+    modalities: "",
+    status: "active",
+    startDate: "",
+  })
+  const cancelButtonRef = useRef(null)
 
   const filteredStudents = students.filter((student) => student.name.toLowerCase().includes(searchTerm.toLowerCase()))
+
+  function handleInputChange(e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
+    const { name, value } = e.target
+    setForm((prev) => ({ ...prev, [name]: value }))
+  }
+
+  function handleAddStudent(e: React.FormEvent) {
+    e.preventDefault()
+    setStudents((prev) => [
+      ...prev,
+      {
+        id: prev.length + 1,
+        name: form.name,
+        age: form.age,
+        modalities: form.modalities.split(",").map((m) => m.trim()),
+        status: form.status,
+        startDate: form.startDate,
+      },
+    ])
+    setForm({ name: "", age: "", modalities: "", status: "active", startDate: "" })
+    setIsModalOpen(false)
+  }
 
   return (
     <div className="space-y-6">
@@ -51,7 +66,10 @@ export default function StudentsPage() {
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
-          <button className="rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-500">
+          <button
+            className="rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-500"
+            onClick={() => setIsModalOpen(true)}
+          >
             Novo Aluno
           </button>
         </div>
@@ -95,6 +113,111 @@ export default function StudentsPage() {
           </Link>
         ))}
       </div>
+
+      {/* Modal de novo aluno */}
+      <Transition.Root show={isModalOpen} as={Fragment}>
+        <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={setIsModalOpen}>
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300" enterFrom="opacity-0" enterTo="opacity-100"
+            leave="ease-in duration-200" leaveFrom="opacity-100" leaveTo="opacity-0"
+          >
+            <div className="fixed inset-0 bg-black bg-opacity-50 transition-opacity" />
+          </Transition.Child>
+
+          <div className="fixed inset-0 z-10 overflow-y-auto">
+            <div className="flex min-h-full items-center justify-center p-4 text-center">
+              <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-300" enterFrom="opacity-0 scale-95" enterTo="opacity-100 scale-100"
+                leave="ease-in duration-200" leaveFrom="opacity-100 scale-100" leaveTo="opacity-0 scale-95"
+              >
+                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-zinc-900 p-6 text-left align-middle shadow-xl transition-all">
+                  <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-white mb-4">
+                    Novo Aluno
+                  </Dialog.Title>
+                  <form onSubmit={handleAddStudent} className="space-y-4">
+                    <div>
+                      <label className="block text-sm font-medium text-zinc-200">Nome</label>
+                      <input
+                        type="text"
+                        name="name"
+                        required
+                        value={form.name}
+                        onChange={handleInputChange}
+                        className="mt-1 w-full rounded-lg border border-zinc-700 bg-zinc-800 px-3 py-2 text-sm text-white focus:border-emerald-500 focus:outline-none"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-zinc-200">Idade</label>
+                      <input
+                        type="text"
+                        name="age"
+                        required
+                        value={form.age}
+                        onChange={handleInputChange}
+                        className="mt-1 w-full rounded-lg border border-zinc-700 bg-zinc-800 px-3 py-2 text-sm text-white focus:border-emerald-500 focus:outline-none"
+                        placeholder="Ex: 36 anos"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-zinc-200">Modalidades</label>
+                      <input
+                        type="text"
+                        name="modalities"
+                        required
+                        value={form.modalities}
+                        onChange={handleInputChange}
+                        className="mt-1 w-full rounded-lg border border-zinc-700 bg-zinc-800 px-3 py-2 text-sm text-white focus:border-emerald-500 focus:outline-none"
+                        placeholder="Separe por vírgula, ex: Musculação, Natação"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-zinc-200">Status</label>
+                      <select
+                        name="status"
+                        value={form.status}
+                        onChange={handleInputChange}
+                        className="mt-1 w-full rounded-lg border border-zinc-700 bg-zinc-800 px-3 py-2 text-sm text-white focus:border-emerald-500 focus:outline-none"
+                      >
+                        <option value="active">Ativo</option>
+                        <option value="pending">Pendente</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-zinc-200">Data de Início</label>
+                      <input
+                        type="date"
+                        name="startDate"
+                        required
+                        value={form.startDate}
+                        onChange={handleInputChange}
+                        className="mt-1 w-full rounded-lg border border-zinc-700 bg-zinc-800 px-3 py-2 text-sm text-white focus:border-emerald-500 focus:outline-none"
+                      />
+                    </div>
+                    <div className="flex justify-end gap-2 mt-6">
+                      <button
+                        type="button"
+                        className="rounded-lg bg-zinc-700 px-4 py-2 text-sm font-medium text-white hover:bg-zinc-600"
+                        onClick={() => setIsModalOpen(false)}
+                        ref={cancelButtonRef}
+                      >
+                        Cancelar
+                      </button>
+                      <button
+                        type="submit"
+                        className="rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-500"
+                      >
+                        Adicionar
+                      </button>
+                    </div>
+                  </form>
+                </Dialog.Panel>
+              </Transition.Child>
+            </div>
+          </div>
+        </Dialog>
+      </Transition.Root>
     </div>
   )
 }

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Tab } from "@headlessui/react"
 import {
   CreditCardIcon,
@@ -9,12 +9,39 @@ import {
   ArrowDownTrayIcon,
   PlusIcon,
 } from "@heroicons/react/24/outline"
+import { useStripeCheckout } from "@/hooks/useStripeCheckout"
+import { useSearchParams } from "next/navigation"
+import { toast } from "sonner"
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ")
 }
 
+// Configuração de preços fictícia - substitua pelos IDs reais do seu Stripe
+const STRIPE_PRICES = {
+  basic: "price_basic123456", // ID fictício do plano básico no Stripe
+  premium: "price_premium123456", // ID fictício do plano premium no Stripe
+  vip: "price_vip123456", // ID fictício do plano VIP no Stripe
+}
+
 export default function Payments() {
+  const { redirectToCheckout, isLoading } = useStripeCheckout()
+  const searchParams = useSearchParams()
+  
+  useEffect(() => {
+    // Verificar status do pagamento baseado nos query params
+    const success = searchParams.get("success")
+    const canceled = searchParams.get("canceled")
+    
+    if (success === "true") {
+      toast.success("Pagamento realizado com sucesso!")
+    }
+    
+    if (canceled === "true") {
+      toast.error("Pagamento cancelado")
+    }
+  }, [searchParams])
+
   const [categories] = useState({
     Histórico: [
       {
@@ -36,13 +63,24 @@ export default function Payments() {
     ],
   })
 
+  const handleNewPayment = () => {
+    redirectToCheckout({
+      priceId: STRIPE_PRICES.premium, // Usa o preço do plano premium como padrão
+      planName: "Premium",
+    })
+  }
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h2 className="text-2xl font-bold">Pagamentos</h2>
-        <button className="flex items-center gap-1 rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-500">
+        <button 
+          className="flex items-center gap-1 rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-500"
+          onClick={handleNewPayment}
+          disabled={isLoading}
+        >
           <PlusIcon className="h-4 w-4" />
-          Novo Pagamento
+          {isLoading ? "Processando..." : "Novo Pagamento"}
         </button>
       </div>
 
@@ -232,8 +270,15 @@ export default function Payments() {
                 Aulas coletivas
               </li>
             </ul>
-            <button className="w-full rounded-lg border border-emerald-600 bg-transparent px-4 py-2 text-sm font-medium text-emerald-500 hover:bg-emerald-600 hover:text-white">
-              Selecionar Plano
+            <button 
+              className="w-full rounded-lg border border-emerald-600 bg-transparent px-4 py-2 text-sm font-medium text-emerald-500 hover:bg-emerald-600 hover:text-white"
+              onClick={() => redirectToCheckout({
+                priceId: STRIPE_PRICES.basic,
+                planName: "Básico"
+              })}
+              disabled={isLoading}
+            >
+              {isLoading ? "Processando..." : "Selecionar Plano"}
             </button>
           </div>
 
@@ -327,8 +372,15 @@ export default function Payments() {
                 Aulas coletivas
               </li>
             </ul>
-            <button className="w-full rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-500">
-              Seu Plano Atual
+            <button 
+              className="w-full rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-500"
+              onClick={() => redirectToCheckout({
+                priceId: STRIPE_PRICES.premium,
+                planName: "Premium"
+              })}
+              disabled={isLoading}
+            >
+              {isLoading ? "Processando..." : "Seu Plano Atual"}
             </button>
           </div>
 
@@ -419,8 +471,15 @@ export default function Payments() {
                 Acesso prioritário às aulas
               </li>
             </ul>
-            <button className="w-full rounded-lg border border-emerald-600 bg-transparent px-4 py-2 text-sm font-medium text-emerald-500 hover:bg-emerald-600 hover:text-white">
-              Fazer Upgrade
+            <button 
+              className="w-full rounded-lg border border-emerald-600 bg-transparent px-4 py-2 text-sm font-medium text-emerald-500 hover:bg-emerald-600 hover:text-white"
+              onClick={() => redirectToCheckout({
+                priceId: STRIPE_PRICES.vip,
+                planName: "VIP"
+              })}
+              disabled={isLoading}
+            >
+              {isLoading ? "Processando..." : "Fazer Upgrade"}
             </button>
           </div>
         </div>

@@ -1,0 +1,56 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// Modelos de exemplo baseados na aplicação
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  name      String?
+  role      String   @default("user")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  students  Student[]
+}
+
+model Student {
+  id          String   @id @default(uuid())
+  name        String
+  email       String?
+  phone       String?
+  status      String   @default("active")
+  trainerId   String
+  trainer     User     @relation(fields: [trainerId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  workouts    Workout[]
+}
+
+model Workout {
+  id          String   @id @default(uuid())
+  title       String
+  description String?
+  studentId   String
+  student     Student  @relation(fields: [studentId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  exercises   Exercise[]
+}
+
+model Exercise {
+  id          String   @id @default(uuid())
+  name        String
+  sets        Int
+  reps        Int
+  rest        Int?     // Em segundos
+  workoutId   String
+  workout     Workout  @relation(fields: [workoutId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+} 
