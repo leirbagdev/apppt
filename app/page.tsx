@@ -22,6 +22,14 @@ export default function Home() {
     e.preventDefault();
     setLoading(true);
     setError('');
+    
+    // Verificar se o cliente Supabase está disponível
+    if (!supabase) {
+      setError('Erro de conexão com o servidor. Por favor, tente novamente.');
+      setLoading(false);
+      return;
+    }
+    
     if (isLogin) {
       const { error } = await supabase.auth.signInWithPassword({ email, password });
       if (error) setError(error.message);
