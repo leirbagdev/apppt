@@ -12,13 +12,11 @@ export default function Home() {
   const [error, setError] = useState('');
   const router = useRouter();
   
-  // Certifique-se que o usuário sempre veja a landing page ao acessar "/"
+  // Protege contra redirecionamentos indesejados na landing page
   useEffect(() => {
-    if (window.location.pathname === '/') {
-      // Força estar na página inicial
-      router.push('/')
-    }
-  }, [router]);
+    // Não faça nada, apenas deixe o usuário na página inicial
+    // Remover o redirecionamento para evitar loop
+  }, []);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
