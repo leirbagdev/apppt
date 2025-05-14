@@ -2,6 +2,9 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabaseClient';
+import LanguageSelector from '@/components/ui/LanguageSelector';
+import { useTranslation } from '@/lib/i18n';
+import ScrollAnimations from '@/components/animations/ScrollAnimations';
 
 export default function Home() {
   const [showLogin, setShowLogin] = useState(false);
@@ -11,6 +14,7 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const router = useRouter();
+  const { t } = useTranslation();
   
   // Protege contra redirecionamentos indesejados na landing page
   useEffect(() => {
@@ -42,46 +46,9 @@ export default function Home() {
     setLoading(false);
   }
 
-  // Parallax scrolling effect
-  useEffect(() => {
-    function handleScroll() {
-      const animatedElements = document.querySelectorAll('.animate-fadeUp');
-      
-      animatedElements.forEach(element => {
-        const elementPosition = element.getBoundingClientRect().top;
-        const screenPosition = window.innerHeight / 1.3;
-        
-        if (elementPosition < screenPosition) {
-          element.classList.add('opacity-100');
-          element.classList.add('translate-y-0');
-          element.classList.remove('opacity-0');
-          element.classList.remove('translate-y-5');
-        }
-      });
-    }
-    
-    window.addEventListener('scroll', handleScroll);
-    
-    // Initialize animations
-    const animatedElements = document.querySelectorAll('.animate-fadeUp');
-    animatedElements.forEach((element, index) => {
-      element.classList.add('opacity-0', 'translate-y-5', 'transition-all', 'duration-600');
-      (element as HTMLElement).style.transitionDelay = `${index * 0.1}s`;
-    });
-    
-    setTimeout(() => {
-      const heroElements = document.querySelectorAll('.hero .animate-fadeUp');
-      heroElements.forEach(element => {
-        element.classList.add('opacity-100', 'translate-y-0');
-        element.classList.remove('opacity-0', 'translate-y-5');
-      });
-    }, 300);
-    
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   return (
     <>
+      <ScrollAnimations />
       {!showLogin ? (
         <>
           {/* Navigation */}
@@ -90,39 +57,42 @@ export default function Home() {
               apppt<span className="text-[#3ddcb5]">✓</span>
             </div>
             <div className="nav-links hidden md:flex gap-8">
-              <a href="#features" className="text-white hover:text-[#3ddcb5] transition-colors">Funcionalidades</a>
-              <a href="#pricing" className="text-white hover:text-[#3ddcb5] transition-colors">Preços</a>
-              <a href="#contact" className="text-white hover:text-[#3ddcb5] transition-colors">Contato</a>
+              <a href="#features" className="text-white hover:text-[#3ddcb5] transition-colors">{t('nav.features')}</a>
+              <a href="#pricing" className="text-white hover:text-[#3ddcb5] transition-colors">{t('nav.pricing')}</a>
+              <a href="#contact" className="text-white hover:text-[#3ddcb5] transition-colors">{t('nav.contact')}</a>
             </div>
-            <button 
-              className="bg-gradient-to-r from-[#00c2a8] to-[#3ddcb5] text-white border-none py-3 px-6 rounded-full font-semibold cursor-pointer transition hover:-translate-y-1 hover:shadow-lg hover:shadow-[#00c2a8]/30"
-              onClick={() => setShowLogin(true)}
-            >
-              Iniciar Teste Gratuito
-            </button>
+            <div className="flex items-center gap-6">
+              <LanguageSelector />
+              <button 
+                className="bg-gradient-to-r from-[#00c2a8] to-[#3ddcb5] text-white border-none py-3 px-6 rounded-full font-semibold cursor-pointer transition hover:-translate-y-1 hover:shadow-lg hover:shadow-[#00c2a8]/30"
+                onClick={() => setShowLogin(true)}
+              >
+                {t('nav.startFreeTrial')}
+              </button>
+            </div>
           </nav>
 
           {/* Hero Section */}
           <section className="hero h-screen flex flex-col justify-center items-start px-[10%] relative overflow-hidden bg-gradient-to-r from-black to-[#111]">
             <div className="hero-content w-full lg:w-1/2 z-10 animate-fadeUp">
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold mb-5 bg-gradient-to-r from-white to-[#3ddcb5] bg-clip-text text-transparent">
-                Eleve seu serviço de Personal Trainer
+                {t('hero.title')}
               </h1>
               <p className="text-lg md:text-xl leading-relaxed mb-8 text-[#d1d5db]">
-                Transforme a experiência dos seus alunos com o apppt, projetado exclusivamente para treinadores. Gerencie, prescreva, e conecte-se com seus alunos de forma eficiente e eficaz.
+                {t('hero.subtitle')}
               </p>
               <div className="trust-badges flex flex-wrap justify-center md:justify-start items-center gap-5 mt-10">
                 <div className="badge bg-white/10 px-5 py-2.5 rounded-full flex items-center gap-2.5">
                   <span className="text-[#3ddcb5]">⭐</span>
-                  <span className="text-[#d1d5db] text-sm">Confiado por mais de 10.000 profissionais de fitness</span>
+                  <span className="text-[#d1d5db] text-sm">{t('trust.professionals')}</span>
                 </div>
                 <div className="badge bg-white/10 px-5 py-2.5 rounded-full flex items-center gap-2.5">
                   <span className="text-[#3ddcb5]">🔒</span>
-                  <span className="text-[#d1d5db] text-sm">Segurança de nível com criptografia de ponta</span>
+                  <span className="text-[#d1d5db] text-sm">{t('trust.security')}</span>
                 </div>
                 <div className="badge bg-white/10 px-5 py-2.5 rounded-full flex items-center gap-2.5">
                   <span className="text-[#3ddcb5]">🚀</span>
-                  <span className="text-[#d1d5db] text-sm">Garantia de 99,9% de uptime</span>
+                  <span className="text-[#d1d5db] text-sm">{t('trust.uptime')}</span>
                 </div>
               </div>
             </div>
@@ -133,23 +103,23 @@ export default function Home() {
             <div className="w-full flex flex-col lg:flex-row justify-between items-center px-[10%] gap-12">
               <div className="feature-box w-full lg:w-1/2 bg-[#11182733] backdrop-blur-md rounded-[20px] p-10 shadow-lg animate-fadeUp">
                 <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-5 text-white">
-                  Visualize o Progresso do Cliente em Tempo Real
+                  {t('features.title')}
                 </h2>
                 <p className="text-lg leading-relaxed mb-8 text-[#d1d5db]">
-                  Nosso painel intuitivo transforma dados complexos de fitness em insights claros e acionáveis. Monitore métricas dos clientes, identifique tendências instantaneamente e tome decisões baseadas em dados que aceleram os resultados. Sua expertise, amplificada por análises poderosas.
+                  {t('features.description')}
                 </p>
                 <div className="feature-icons flex justify-between mt-10">
                   <div className="flex flex-col items-center text-center">
                     <span className="text-4xl text-[#3ddcb5] mb-4">📊</span>
-                    <span className="text-[#d1d5db]">Métricas Personalizadas</span>
+                    <span className="text-[#d1d5db]">{t('features.metrics')}</span>
                   </div>
                   <div className="flex flex-col items-center text-center">
                     <span className="text-4xl text-[#3ddcb5] mb-4">⚡</span>
-                    <span className="text-[#d1d5db]">Dados em Tempo Real</span>
+                    <span className="text-[#d1d5db]">{t('features.realtime')}</span>
                   </div>
                   <div className="flex flex-col items-center text-center">
                     <span className="text-4xl text-[#3ddcb5] mb-4">🔄</span>
-                    <span className="text-[#d1d5db]">Relatórios Automatizados</span>
+                    <span className="text-[#d1d5db]">{t('features.reports')}</span>
                   </div>
                 </div>
               </div>
