@@ -1,13 +1,9 @@
-import { createClient } from '@supabase/supabase-js'
+import { createBrowserClient } from '@supabase/ssr'
 
-let supabase: ReturnType<typeof createClient> | null = null;
-
-// Inicializa o cliente Supabase apenas no lado do cliente
-if (typeof window !== 'undefined') {
-  supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  )
-}
+// Inicializa o cliente Supabase para uso no lado do cliente (navegador)
+const supabase = createBrowserClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+)
 
 export { supabase } 

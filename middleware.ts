@@ -67,19 +67,23 @@ export async function middleware(req: NextRequest) {
       console.log('[Middleware] Sessão Supabase obtida:', session ? 'Sessão ativa' : 'Nenhuma sessão');
     }
 
-    // Se estiver na página inicial, não redirecione
-    if (req.nextUrl.pathname === '/') {
-      console.log('[Middleware] Rota é /, permitindo acesso.');
-      return res
+    const { pathname } = req.nextUrl;
+
+    // Usuário logado tentando acessar /login ou / (landing page)
+    if (session && (pathname === '/login' || pathname === '/')) {
+      console.log(`[Middleware] Usuário logado acessando ${pathname}. Redirecionando para /dashboard.`);
+      return NextResponse.redirect(new URL('/dashboard', req.url));
     }
 
-    // Se estiver tentando acessar páginas protegidas sem estar logado
-    if (!session && req.nextUrl.pathname.startsWith('/dashboard')) {
+    // Usuário não logado tentando acessar /dashboard
+    if (!session && pathname.startsWith('/dashboard')) {
       console.log('[Middleware] Sem sessão e tentando acessar /dashboard. Redirecionando para /login.');
-      return NextResponse.redirect(new URL('/login', req.url))
+      return NextResponse.redirect(new URL('/login', req.url));
     }
-
-    console.log('[Middleware] Concluído. Retornando resposta.');
+    
+    // Se nenhuma das condições acima for atendida (ex: usuário logado acessando /dashboard, ou não logado acessando /login ou /),
+    // permite o acesso.
+    console.log(`[Middleware] Permitindo acesso para ${pathname}. Sessão: ${session ? 'ativa' : 'inativa'}`);
     return res
   } catch (e: any) {
     console.error('[Middleware] Erro inesperado no middleware:', e.message, e.stack);

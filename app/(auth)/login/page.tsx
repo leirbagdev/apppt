@@ -18,6 +18,13 @@ export default function LoginPage() {
     setLoading(true)
     setError("")
     setSuccess("")
+
+    if (!supabase) {
+      setError("Erro de conexão. Tente novamente mais tarde.")
+      setLoading(false)
+      return
+    }
+
     if (isLogin) {
       const { error } = await supabase.auth.signInWithPassword({ email, password })
       if (error) setError(error.message)
@@ -39,6 +46,13 @@ export default function LoginPage() {
   async function handleGoogleLogin() {
     setLoading(true)
     setError("")
+
+    if (!supabase) {
+      setError("Erro de conexão. Tente novamente mais tarde.")
+      setLoading(false)
+      return
+    }
+
     try {
       await supabase.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: window.location.origin + '/dashboard' } })
     } catch (err: any) {
@@ -49,9 +63,9 @@ export default function LoginPage() {
 
   return (
     <>
-      <head>
-        {/* <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" /> */}
-      </head>
+      {/* <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+      </head> */}
       <div className="flex flex-col items-center justify-center min-h-screen bg-[#171717] px-4">
         <div className="max-w-md w-full bg-[#222222] rounded-lg p-10 shadow-lg mx-auto mt-10">
           <h2 className="text-2xl font-bold text-center mb-2">appt<span className="text-[#5bae7d]">.</span> for trainers</h2>
