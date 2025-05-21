@@ -1,61 +1,75 @@
-# appt for trainers
+# Apppt - Plataforma para Treinadores
 
-Plataforma para profissionais de educação física e personal trainers gerenciarem clientes, treinos, agenda e cobranças.
+## Visão Geral
+Apppt é uma plataforma desenvolvida para treinadores gerenciarem seus alunos, acompanharem métricas de saúde e progresso, e oferecerem uma experiência personalizada. Este projeto utiliza tecnologias modernas como Next.js, Supabase e TailwindCSS.
+
+## Funcionalidades
+- **Landing Page**: Página inicial responsiva com navegação acessível e call-to-action para login.
+- **Autenticação**: Login e cadastro com suporte a Google e Facebook.
+- **Dashboard**: Gerenciamento de alunos, incluindo busca e filtros.
+- **Internacionalização**: Suporte a múltiplos idiomas.
 
 ## Estrutura do Projeto
-
 ```
-├── app/
-│   ├── (landing)/           # Landing page pública
-│   ├── (auth)/              # Login e cadastro
-│   └── dashboard/           # Área logada principal
-├── components/              # Componentes reutilizáveis
-├── hooks/                   # React hooks personalizados
-├── lib/                     # Supabase client, utils, validações
-├── public/                  # Imagens, logos, etc
-├── styles/                  # CSS global e tokens
-├── .env.local               # Variáveis de ambiente (NÃO versionar)
-├── next.config.mjs          # Configurações Next.js
-├── tailwind.config.ts       # Tailwind CSS
-├── postcss.config.mjs
-├── tsconfig.json
-├── package.json
-├── pnpm-lock.yaml
+app/
+  (auth)/
+    login/
+      page.tsx - Página de login e cadastro.
+  dashboard/
+    students/
+      page.tsx - Lista de alunos com busca e detalhes.
+components/
+  ui/
+    LanguageSelector.tsx - Componente para troca de idioma.
+lib/
+  supabaseClient.ts - Configuração do cliente Supabase.
+tests/
+  login.test.tsx - Testes para o fluxo de login.
 ```
 
-## Instalação
+## Tecnologias Utilizadas
+- **Next.js**: Framework React para renderização do lado do servidor.
+- **Supabase**: Backend como serviço para autenticação e banco de dados.
+- **TailwindCSS**: Framework CSS para estilização.
+- **Jest**: Framework de testes.
 
-1. Clone o repositório
-2. Instale as dependências:
+## Configuração do Ambiente
+1. Clone o repositório:
+   ```bash
+   git clone <url-do-repositorio>
    ```
+2. Instale as dependências:
+   ```bash
    pnpm install
    ```
-3. Copie o arquivo `.env.local` de exemplo e preencha com suas chaves do Supabase:
-   ```
-   cp .env.local.example .env.local
-   # Edite .env.local com suas credenciais
-   ```
-4. Rode o projeto:
-   ```
+3. Configure as variáveis de ambiente no arquivo `.env`.
+4. Inicie o servidor de desenvolvimento:
+   ```bash
    pnpm dev
    ```
 
-## Scripts
-- `pnpm dev` — inicia o servidor de desenvolvimento
-- `pnpm build` — build de produção
-- `pnpm start` — inicia o servidor em produção
+## Testes
+Para executar os testes:
+```bash
+pnpm test
+```
 
-## Tecnologias
-- Next.js 13+
-- React
-- Tailwind CSS
-- Supabase
-- TypeScript
+## Contribuição
+Contribuições são bem-vindas! Siga os passos abaixo:
+1. Faça um fork do repositório.
+2. Crie uma branch para sua feature:
+   ```bash
+   git checkout -b minha-feature
+   ```
+3. Faça commit das suas alterações:
+   ```bash
+   git commit -m "Minha nova feature"
+   ```
+4. Envie para o repositório remoto:
+   ```bash
+   git push origin minha-feature
+   ```
+5. Abra um Pull Request.
 
-## Observações
-- O arquivo `.env.local` **NÃO** deve ser versionado.
-- Estrutura modular para facilitar manutenção e escalabilidade.
-
----
-
-Desenvolvido por appt for trainers. 
+## Licença
+Este projeto está licenciado sob a [MIT License](LICENSE).

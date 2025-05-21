@@ -61,6 +61,24 @@ export default function LoginPage() {
     setLoading(false)
   }
 
+  async function handleFacebookLogin() {
+    setLoading(true)
+    setError("")
+
+    if (!supabase) {
+      setError("Erro de conexão. Tente novamente mais tarde.")
+      setLoading(false)
+      return
+    }
+
+    try {
+      await supabase.auth.signInWithOAuth({ provider: 'facebook', options: { redirectTo: window.location.origin + '/dashboard' } })
+    } catch (err: any) {
+      setError("Erro ao autenticar com Facebook")
+    }
+    setLoading(false)
+  }
+
   return (
     <>
       {/* <head>
@@ -79,6 +97,16 @@ export default function LoginPage() {
             {/* <i className="fab fa-google"></i> */}
             <ArrowRightOnRectangleIcon className="h-5 w-5 text-[#5bae7d]" />
             Entrar com Google
+          </button>
+          <button
+            type="button"
+            className="w-full bg-white text-[#171717] font-medium py-3 rounded transition mb-4 flex items-center justify-center gap-2 border border-[#5bae7d] hover:bg-[#5bae7d] hover:text-white"
+            onClick={handleFacebookLogin}
+            disabled={loading}
+          >
+            {/* <i className="fab fa-facebook-f"></i> */}
+            <ArrowRightOnRectangleIcon className="h-5 w-5 text-[#5bae7d]" />
+            Entrar com Facebook
           </button>
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
@@ -101,8 +129,11 @@ export default function LoginPage() {
             {success && <div className="text-green-500 text-sm mb-2">{success}</div>}
             <button type="submit" className="w-full bg-[#5bae7d] hover:bg-[#4c9f6e] text-white font-medium py-3 rounded transition mb-2" disabled={loading}>{loading ? "Enviando..." : isLogin ? "Entrar" : "Cadastrar"}</button>
           </form>
+          <div className="mt-4 text-center">
+            <a href="/auth/recover" className="text-blue-500">Esqueceu sua senha?</a>
+          </div>
         </div>
       </div>
     </>
   )
-} 
+}

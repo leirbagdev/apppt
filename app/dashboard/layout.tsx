@@ -18,6 +18,7 @@ import {
   VideoCameraIcon,
   XMarkIcon,
   HeartIcon,
+  ArrowLeftOnRectangleIcon,
 } from "@heroicons/react/24/outline"
 import { supabase } from "../../lib/supabaseClient"
 
@@ -43,12 +44,21 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   useEffect(() => {
     supabase.auth.getUser().then(({ data }) => {
       if (!data.user) {
-        router.push("/")
+        router.push("/login")
       } else {
         setLoading(false)
       }
     })
   }, [router])
+
+  const handleSignOut = async () => {
+    const { error } = await supabase.auth.signOut()
+    if (error) {
+      console.error("Erro ao fazer logout:", error.message)
+    } else {
+      router.push("/login")
+    }
+  }
 
   if (loading) {
     return <div className="flex items-center justify-center h-screen">Carregando...</div>
@@ -153,26 +163,13 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                         </ul>
                       </li>
                       <li className="mt-auto">
-                        <Link
-                          href="/"
-                          className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-zinc-400 hover:bg-zinc-700 hover:text-white"
+                        <button
+                          onClick={handleSignOut}
+                          className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-zinc-400 hover:bg-zinc-700 hover:text-white w-full"
                         >
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth={1.5}
-                            stroke="currentColor"
-                            className="h-6 w-6"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"
-                            />
-                          </svg>
+                          <ArrowLeftOnRectangleIcon className="h-6 w-6 shrink-0 text-zinc-400 group-hover:text-white" />
                           Sair
-                        </Link>
+                        </button>
                       </li>
                     </ul>
                   </nav>
@@ -241,26 +238,13 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                 </ul>
               </li>
               <li className="mt-auto">
-                <Link
-                  href="/"
-                  className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-zinc-400 hover:bg-zinc-700 hover:text-white"
+                <button
+                  onClick={handleSignOut}
+                  className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-zinc-400 hover:bg-zinc-700 hover:text-white w-full"
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="h-6 w-6"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"
-                    />
-                  </svg>
+                  <ArrowLeftOnRectangleIcon className="h-6 w-6 shrink-0 text-zinc-400 group-hover:text-white" />
                   Sair
-                </Link>
+                </button>
               </li>
             </ul>
           </nav>

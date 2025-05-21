@@ -8,11 +8,9 @@ import ScrollAnimations from '@/components/animations/ScrollAnimations';
 export default function Home() {
   const router = useRouter();
   const { t } = useTranslation();
-  
-  // Protege contra redirecionamentos indesejados na landing page
+
   useEffect(() => {
     // Não faça nada, apenas deixe o usuário na página inicial
-    // Remover o redirecionamento para evitar loop
   }, []);
 
   return (
@@ -25,14 +23,14 @@ export default function Home() {
             apppt<span className="text-[#3ddcb5]">✓</span>
           </div>
           <div className="nav-links hidden md:flex gap-8">
-            <a href="#features" className="text-white hover:text-[#3ddcb5] transition-colors">{t('nav.features')}</a>
-            <a href="#pricing" className="text-white hover:text-[#3ddcb5] transition-colors">{t('nav.pricing')}</a>
-            <a href="#contact" className="text-white hover:text-[#3ddcb5] transition-colors">{t('nav.contact')}</a>
+            <a href="#features" className="text-white hover:text-[#3ddcb5] transition-colors focus:outline-none focus:ring-2 focus:ring-[#3ddcb5]">{t('nav.features')}</a>
+            <a href="#pricing" className="text-white hover:text-[#3ddcb5] transition-colors focus:outline-none focus:ring-2 focus:ring-[#3ddcb5]">{t('nav.pricing')}</a>
+            <a href="#contact" className="text-white hover:text-[#3ddcb5] transition-colors focus:outline-none focus:ring-2 focus:ring-[#3ddcb5]">{t('nav.contact')}</a>
           </div>
           <div className="flex items-center gap-6">
             <LanguageSelector />
             <button 
-              className="bg-gradient-to-r from-[#00c2a8] to-[#3ddcb5] text-white border-none py-3 px-6 rounded-full font-semibold cursor-pointer transition hover:-translate-y-1 hover:shadow-lg hover:shadow-[#00c2a8]/30"
+              className="bg-gradient-to-r from-[#00c2a8] to-[#3ddcb5] text-white border-none py-3 px-6 rounded-full font-semibold cursor-pointer transition hover:-translate-y-1 hover:shadow-lg hover:shadow-[#00c2a8]/30 focus:outline-none focus:ring-2 focus:ring-[#3ddcb5]"
               onClick={() => router.push('/login')}
             >
               Experimentar Grátis
@@ -76,13 +74,22 @@ export default function Home() {
                   <span className="text-[#d1d5db]">{t('features.reports')}</span>
                 </div>
               </div>
+              {/* CTA Button for Features */}
+              <div className="mt-10 flex justify-center">
+                <button
+                  className="bg-gradient-to-r from-[#00c2a8] to-[#3ddcb5] text-white py-3 px-8 rounded-full font-semibold cursor-pointer transition hover:-translate-y-1 hover:shadow-lg"
+                  onClick={() => router.push('/login')}
+                >
+                  Experimentar Grátis
+                </button>
+              </div>
             </div>
             <div className="w-full lg:w-1/2">
               {/* Dashboard mockup em notebook */}
               <div className="relative w-full animate-fadeUp">
                 <div className="laptop-frame bg-[#222] rounded-[20px] pt-5 pb-7 px-5 shadow-xl">
                   <div className="laptop-screen bg-white rounded-t-lg overflow-hidden">
-                    <div className="relative pt-[56.25%]"> {/* 16:9 aspect ratio */}
+                    <div className="relative pt-[56.25%]">
                       <img 
                         src="/placeholder.jpg" 
                         alt="Dashboard de progresso do cliente" 
@@ -154,6 +161,15 @@ export default function Home() {
                   <span className="text-[#d1d5db]">Chat com Clientes</span>
                 </div>
               </div>
+              {/* CTA Button for AI Assistant */}
+              <div className="mt-10 flex justify-center">
+                <button
+                  className="bg-gradient-to-r from-[#00c2a8] to-[#3ddcb5] text-white py-3 px-8 rounded-full font-semibold cursor-pointer transition hover:-translate-y-1 hover:shadow-lg"
+                  onClick={() => router.push('/login')}
+                >
+                  Experimentar Grátis
+                </button>
+              </div>
             </div>
           </div>
         </section>
@@ -182,13 +198,22 @@ export default function Home() {
                   <span className="text-[#d1d5db]">Sistema de Pagamento</span>
                 </div>
               </div>
+              {/* CTA Button for Workflow */}
+              <div className="mt-10 flex justify-center">
+                <button
+                  className="bg-gradient-to-r from-[#00c2a8] to-[#3ddcb5] text-white py-3 px-8 rounded-full font-semibold cursor-pointer transition hover:-translate-y-1 hover:shadow-lg"
+                  onClick={() => router.push('/login')}
+                >
+                  Experimentar Grátis
+                </button>
+              </div>
             </div>
             <div className="w-full lg:w-1/2">
               {/* Tablet/iPad mockup para automação de fluxo */}
               <div className="relative w-full flex justify-center items-center animate-fadeUp">
                 <div className="tablet-frame bg-[#333] rounded-[30px] p-3 shadow-xl">
                   <div className="tablet-screen rounded-[20px] bg-white overflow-hidden">
-                    <div className="relative w-full" style={{paddingTop: '75%'}}> {/* 4:3 aspect ratio */}
+                    <div className="relative w-full" style={{paddingTop: '75%'}}>
                       <img 
                         src="/placeholder.svg" 
                         alt="Sistema de automação de fluxo de trabalho" 
@@ -279,7 +304,10 @@ export default function Home() {
                   <span className="text-[#10b981] mr-2.5">✓</span> Automação de lembretes
                 </li>
               </ul>
-              <button className="w-full py-4 bg-transparent border-2 border-[#00c2a8] text-white rounded-[10px] text-base font-semibold cursor-pointer transition hover:-translate-y-1 hover:shadow-lg">
+              <button
+                className="w-full py-4 bg-transparent border-2 border-[#00c2a8] text-white rounded-[10px] text-base font-semibold cursor-pointer transition hover:-translate-y-1 hover:shadow-lg"
+                onClick={() => router.push('/login')}
+              >
                 Começar Agora
               </button>
             </div>
@@ -307,7 +335,10 @@ export default function Home() {
                   <span className="text-white mr-2.5">✓</span> Análises avançadas de desempenho
                 </li>
               </ul>
-              <button className="w-full py-4 bg-gradient-to-r from-[#00c2a8] to-[#3ddcb5] text-white rounded-[10px] text-base font-semibold cursor-pointer transition hover:-translate-y-1 hover:shadow-lg">
+              <button
+                className="w-full py-4 bg-gradient-to-r from-[#00c2a8] to-[#3ddcb5] text-white rounded-[10px] text-base font-semibold cursor-pointer transition hover:-translate-y-1 hover:shadow-lg"
+                onClick={() => router.push('/login')}
+              >
                 Escolher Pro
               </button>
             </div>
@@ -332,7 +363,10 @@ export default function Home() {
                   <span className="text-[#10b981] mr-2.5">✓</span> Consultoria de implementação
                 </li>
               </ul>
-              <button className="w-full py-4 bg-transparent border-2 border-[#00c2a8] text-white rounded-[10px] text-base font-semibold cursor-pointer transition hover:-translate-y-1 hover:shadow-lg">
+              <button
+                className="w-full py-4 bg-transparent border-2 border-[#00c2a8] text-white rounded-[10px] text-base font-semibold cursor-pointer transition hover:-translate-y-1 hover:shadow-lg"
+                onClick={() => router.push('/login')}
+              >
                 Contato Comercial
               </button>
             </div>
@@ -348,7 +382,10 @@ export default function Home() {
             Junte-se a milhares de profissionais que estão redefinindo o treinamento personalizado com tecnologia de ponta
           </p>
           <div className="flex flex-wrap justify-center gap-5">
-            <button className="bg-white text-[#008b7a] border-none py-4 px-8 rounded-full text-base font-semibold cursor-pointer transition hover:-translate-y-1 hover:shadow-lg">
+            <button
+              className="bg-white text-[#008b7a] border-none py-4 px-8 rounded-full text-base font-semibold cursor-pointer transition hover:-translate-y-1 hover:shadow-lg"
+              onClick={() => router.push('/login')}
+            >
               Agendar Demonstração
             </button>
             <button 
@@ -363,51 +400,7 @@ export default function Home() {
         {/* Footer */}
         <footer id="contact" className="bg-[#0a0a0a] py-16 px-[10%]">
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8 mb-12">
-            <div>
-              <h4 className="text-lg font-semibold mb-5 text-white">AppTrainer</h4>
-              <ul className="space-y-2.5">
-                <li><a href="#" className="text-[#9ca3af] no-underline hover:text-[#3ddcb5] transition-colors">Sobre Nós</a></li>
-                <li><a href="#" className="text-[#9ca3af] no-underline hover:text-[#3ddcb5] transition-colors">Nosso Time</a></li>
-                <li><a href="#" className="text-[#9ca3af] no-underline hover:text-[#3ddcb5] transition-colors">Carreiras</a></li>
-                <li><a href="#" className="text-[#9ca3af] no-underline hover:text-[#3ddcb5] transition-colors">Imprensa</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-lg font-semibold mb-5 text-white">Funcionalidades</h4>
-              <ul className="space-y-2.5">
-                <li><a href="#" className="text-[#9ca3af] no-underline hover:text-[#3ddcb5] transition-colors">Dashboard Personalizado</a></li>
-                <li><a href="#" className="text-[#9ca3af] no-underline hover:text-[#3ddcb5] transition-colors">Assistente Inteligente</a></li>
-                <li><a href="#" className="text-[#9ca3af] no-underline hover:text-[#3ddcb5] transition-colors">Automação de Workflow</a></li>
-                <li><a href="#" className="text-[#9ca3af] no-underline hover:text-[#3ddcb5] transition-colors">Relatórios e Análises</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-lg font-semibold mb-5 text-white">Recursos</h4>
-              <ul className="space-y-2.5">
-                <li><a href="#" className="text-[#9ca3af] no-underline hover:text-[#3ddcb5] transition-colors">Academia de Conhecimento</a></li>
-                <li><a href="#" className="text-[#9ca3af] no-underline hover:text-[#3ddcb5] transition-colors">Webinars</a></li>
-                <li><a href="#" className="text-[#9ca3af] no-underline hover:text-[#3ddcb5] transition-colors">Guias e E-books</a></li>
-                <li><a href="#" className="text-[#9ca3af] no-underline hover:text-[#3ddcb5] transition-colors">API e Integrações</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-lg font-semibold mb-5 text-white">Suporte</h4>
-              <ul className="space-y-2.5">
-                <li><a href="#" className="text-[#9ca3af] no-underline hover:text-[#3ddcb5] transition-colors">Central de Ajuda</a></li>
-                <li><a href="#" className="text-[#9ca3af] no-underline hover:text-[#3ddcb5] transition-colors">Contatar Suporte</a></li>
-                <li><a href="#" className="text-[#9ca3af] no-underline hover:text-[#3ddcb5] transition-colors">Política de Privacidade</a></li>
-                <li><a href="#" className="text-[#9ca3af] no-underline hover:text-[#3ddcb5] transition-colors">Termos de Serviço</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-lg font-semibold mb-5 text-white">Conecte-se</h4>
-              <ul className="space-y-2.5">
-                <li><a href="#" className="text-[#9ca3af] no-underline hover:text-[#3ddcb5] transition-colors">Instagram</a></li>
-                <li><a href="#" className="text-[#9ca3af] no-underline hover:text-[#3ddcb5] transition-colors">LinkedIn</a></li>
-                <li><a href="#" className="text-[#9ca3af] no-underline hover:text-[#3ddcb5] transition-colors">YouTube</a></li>
-                <li><a href="#" className="text-[#9ca3af] no-underline hover:text-[#3ddcb5] transition-colors">Comunidade</a></li>
-              </ul>
-            </div>
+            {/* ...existing code... */}
           </div>
           <div className="text-center pt-8 border-t border-[#222]">
             <p className="text-[#6b7280] text-sm">© 2025 AppTrainer. Todos os direitos reservados.</p>

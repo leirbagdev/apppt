@@ -31,7 +31,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ url: session.url });
   } catch (error) {
     console.error('Error creating checkout session:', error);
-    return NextResponse.json(
+    return NextResponse.json(``
       { error: 'Erro ao criar sessão de checkout' },
       { status: 500 }
     );
