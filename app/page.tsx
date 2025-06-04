@@ -304,9 +304,9 @@ export default function LandingPage() {
         <div className="max-w-7xl mx-auto text-center" style={{ transform: `translateY(${parallaxOffset}px)` }}>
           <FadeIn duration={800}>
             <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white via-green-100 to-green-300 bg-clip-text text-transparent">
-              O Futuro do
+              Gerencie seus clientes e treinos
               <br />
-              <span className="text-green-400 animate-pulse">Personal Training</span>
+              <span className="text-green-400 animate-pulse">de forma inteligente</span>
             </h1>
           </FadeIn>
 
