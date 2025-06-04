@@ -1,0 +1,588 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Tema OLED Escuro (Padrão) */
+  --primary: #4ade80;
+  --on-primary: #000000;
+  --primary-container: #22c55e;
+  --on-primary-container: #000000;
+
+  --secondary: #60a5fa;
+  --on-secondary: #000000;
+  --secondary-container: #1f2937;
+  --on-secondary-container: #e5e7eb;
+
+  --tertiary: #a78bfa;
+  --on-tertiary: #000000;
+  --tertiary-container: #1f2937;
+  --on-tertiary-container: #e4dfff;
+
+  --error: #ef4444;
+  --on-error: #000000;
+  --error-container: #7f1d1d;
+  --on-error-container: #fecaca;
+
+  --success: #4ade80;
+  --on-success: #000000;
+  --success-container: #22c55e;
+  --on-success-container: #000000;
+
+  --warning: #f59e0b;
+  --on-warning: #000000;
+  --warning-container: #92400e;
+  --on-warning-container: #fed7aa;
+
+  --surface: #000000;
+  --on-surface: #ffffff;
+  --surface-variant: #111111;
+  --on-surface-variant: #e5e7eb;
+  --surface-container: #000000;
+  --surface-container-high: #111111;
+  --surface-container-highest: #1f2937;
+
+  --outline: #374151;
+  --outline-variant: #1f2937;
+  --shadow: #000000;
+  --scrim: #000000;
+
+  --inverse-surface: #ffffff;
+  --inverse-on-surface: #000000;
+  --inverse-primary: #22c55e;
+}
+
+[data-theme="black"] {
+  --primary: #4ade80;
+  --on-primary: #003910;
+  --primary-container: #005d1a;
+  --on-primary-container: #7cf894;
+
+  --secondary: #60a5fa;
+  --on-secondary: #001d36;
+  --secondary-container: #00344f;
+  --on-secondary-container: #c2e7ff;
+
+  --tertiary: #a78bfa;
+  --on-tertiary: #2d1b69;
+  --tertiary-container: #443382;
+  --on-tertiary-container: #e4dfff;
+
+  --error: #ef4444;
+  --on-error: #690005;
+  --error-container: #93000a;
+  --on-error-container: #ffdad6;
+
+  --success: #22c55e;
+  --on-success: #003910;
+  --success-container: #005d1a;
+  --on-success-container: #7cf894;
+
+  --warning: #f59e0b;
+  --on-warning: #452b00;
+  --warning-container: #633f00;
+  --on-warning-container: #ffdf9c;
+
+  --surface: #000000;
+  --on-surface: #ffffff;
+  --surface-variant: #0a0a0a;
+  --on-surface-variant: #e0e0e0;
+  --surface-container: #1a1a1a;
+  --surface-container-high: #262626;
+  --surface-container-highest: #333333;
+
+  --outline: #404040;
+  --outline-variant: #2a2a2a;
+  --shadow: #000000;
+  --scrim: #000000;
+
+  --inverse-surface: #ffffff;
+  --inverse-on-surface: #000000;
+  --inverse-primary: #22c55e;
+}
+
+[data-theme="darkGray"] {
+  --primary: #4ade80;
+  --on-primary: #003910;
+  --primary-container: #005d1a;
+  --on-primary-container: #7cf894;
+
+  --secondary: #60a5fa;
+  --on-secondary: #001d36;
+  --secondary-container: #00344f;
+  --on-secondary-container: #c2e7ff;
+
+  --tertiary: #a78bfa;
+  --on-tertiary: #2d1b69;
+  --tertiary-container: #443382;
+  --on-tertiary-container: #e4dfff;
+
+  --error: #ef4444;
+  --on-error: #690005;
+  --error-container: #93000a;
+  --on-error-container: #ffdad6;
+
+  --success: #22c55e;
+  --on-success: #003910;
+  --success-container: #005d1a;
+  --on-success-container: #7cf894;
+
+  --warning: #f59e0b;
+  --on-warning: #452b00;
+  --warning-container: #633f00;
+  --on-warning-container: #ffdf9c;
+
+  --surface: #1f2937;
+  --on-surface: #f9fafb;
+  --surface-variant: #374151;
+  --on-surface-variant: #e5e7eb;
+  --surface-container: #374151;
+  --surface-container-high: #4b5563;
+  --surface-container-highest: #6b7280;
+
+  --outline: #6b7280;
+  --outline-variant: #4b5563;
+  --shadow: #000000;
+  --scrim: #000000;
+
+  --inverse-surface: #f9fafb;
+  --inverse-on-surface: #1f2937;
+  --inverse-primary: #22c55e;
+}
+
+[data-theme="white"] {
+  --primary: #16a34a;
+  --on-primary: #ffffff;
+  --primary-container: #dcfce7;
+  --on-primary-container: #14532d;
+
+  --secondary: #2563eb;
+  --on-secondary: #ffffff;
+  --secondary-container: #dbeafe;
+  --on-secondary-container: #1e3a8a;
+
+  --tertiary: #7c3aed;
+  --on-tertiary: #ffffff;
+  --tertiary-container: #ede9fe;
+  --on-tertiary-container: #581c87;
+
+  --error: #dc2626;
+  --on-error: #ffffff;
+  --error-container: #fecaca;
+  --on-error-container: #7f1d1d;
+
+  --success: #16a34a;
+  --on-success: #ffffff;
+  --success-container: #dcfce7;
+  --on-success-container: #14532d;
+
+  --warning: #d97706;
+  --on-warning: #ffffff;
+  --warning-container: #fed7aa;
+  --on-warning-container: #92400e;
+
+  --surface: #ffffff;
+  --on-surface: #1f2937;
+  --surface-variant: #f9fafb;
+  --on-surface-variant: #6b7280;
+  --surface-container: #f3f4f6;
+  --surface-container-high: #e5e7eb;
+  --surface-container-highest: #d1d5db;
+
+  --outline: #d1d5db;
+  --outline-variant: #e5e7eb;
+  --shadow: #000000;
+  --scrim: #000000;
+
+  --inverse-surface: #1f2937;
+  --inverse-on-surface: #ffffff;
+  --inverse-primary: #4ade80;
+}
+
+[data-theme="offWhite"] {
+  --primary: #16a34a;
+  --on-primary: #ffffff;
+  --primary-container: #dcfce7;
+  --on-primary-container: #14532d;
+
+  --secondary: #2563eb;
+  --on-secondary: #ffffff;
+  --secondary-container: #dbeafe;
+  --on-secondary-container: #1e3a8a;
+
+  --tertiary: #7c3aed;
+  --on-tertiary: #ffffff;
+  --tertiary-container: #ede9fe;
+  --on-tertiary-container: #581c87;
+
+  --error: #dc2626;
+  --on-error: #ffffff;
+  --error-container: #fecaca;
+  --on-error-container: #7f1d1d;
+
+  --success: #16a34a;
+  --on-success: #ffffff;
+  --success-container: #dcfce7;
+  --on-success-container: #14532d;
+
+  --warning: #d97706;
+  --on-warning: #ffffff;
+  --warning-container: #fed7aa;
+  --on-warning-container: #92400e;
+
+  --surface: #f8fafc;
+  --on-surface: #0f172a;
+  --surface-variant: #f1f5f9;
+  --on-surface-variant: #475569;
+  --surface-container: #e2e8f0;
+  --surface-container-high: #cbd5e1;
+  --surface-container-highest: #94a3b8;
+
+  --outline: #cbd5e1;
+  --outline-variant: #e2e8f0;
+  --shadow: #000000;
+  --scrim: #000000;
+
+  --inverse-surface: #0f172a;
+  --inverse-on-surface: #f8fafc;
+  --inverse-primary: #4ade80;
+}
+
+[data-theme="light"] {
+  --primary: #16a34a;
+  --on-primary: #ffffff;
+  --primary-container: #dcfce7;
+  --on-primary-container: #14532d;
+
+  --secondary: #2563eb;
+  --on-secondary: #ffffff;
+  --secondary-container: #dbeafe;
+  --on-secondary-container: #1e3a8a;
+
+  --surface: #f8f9fa;
+  --on-surface: #1f2937;
+  --surface-variant: #f3f4f6;
+  --on-surface-variant: #6b7280;
+  --surface-container: #ffffff;
+  --surface-container-high: #f3f4f6;
+  --surface-container-highest: #e5e7eb;
+
+  --outline: #d1d5db;
+  --outline-variant: #e5e7eb;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  background-color: var(--surface);
+  color: var(--on-surface);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Suporte para safe area (dispositivos com notch) */
+.safe-area-inset-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Animações de brilho verde */
+@keyframes greenGlow {
+  0%,
+  100% {
+    box-shadow: 0 0 8px rgba(74, 222, 128, 0.4), 0 0 16px rgba(74, 222, 128, 0.2), inset 0 0 8px rgba(74, 222, 128, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 16px rgba(74, 222, 128, 0.8), 0 0 32px rgba(74, 222, 128, 0.4), inset 0 0 12px
+      rgba(74, 222, 128, 0.3);
+  }
+}
+
+@keyframes textGlow {
+  0%,
+  100% {
+    text-shadow: 0 0 4px rgba(74, 222, 128, 0.6), 0 0 8px rgba(74, 222, 128, 0.3);
+  }
+  50% {
+    text-shadow: 0 0 8px rgba(74, 222, 128, 1), 0 0 16px rgba(74, 222, 128, 0.6);
+  }
+}
+
+@keyframes indicatorGlow {
+  0%,
+  100% {
+    box-shadow: 0 0 4px #4ade80, 0 0 8px rgba(74, 222, 128, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 8px #4ade80, 0 0 16px rgba(74, 222, 128, 0.6);
+  }
+}
+
+/* Classes para aplicar as animações */
+.nav-icon-glow {
+  animation: greenGlow 2s ease-in-out infinite;
+}
+
+.nav-text-glow {
+  animation: textGlow 2s ease-in-out infinite;
+}
+
+.nav-indicator-glow {
+  animation: indicatorGlow 2s ease-in-out infinite;
+}
+
+/* Efeitos neon refinados */
+@keyframes subtleGlow {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 2px rgba(74, 222, 128, 0.3)) drop-shadow(0 0 4px rgba(74, 222, 128, 0.1));
+  }
+  50% {
+    filter: drop-shadow(0 0 4px rgba(74, 222, 128, 0.5)) drop-shadow(0 0 8px rgba(74, 222, 128, 0.2));
+  }
+}
+
+@keyframes subtleTextGlow {
+  0%,
+  100% {
+    text-shadow: 0 0 2px rgba(74, 222, 128, 0.3), 0 0 4px rgba(74, 222, 128, 0.1);
+  }
+  50% {
+    text-shadow: 0 0 4px rgba(74, 222, 128, 0.5), 0 0 8px rgba(74, 222, 128, 0.2);
+  }
+}
+
+@keyframes radialPulse {
+  0%,
+  100% {
+    background: radial-gradient(circle at center, rgba(74, 222, 128, 0.06) 0%, transparent 70%);
+  }
+  50% {
+    background: radial-gradient(
+      circle at center,
+      rgba(74, 222, 128, 0.1) 0%,
+      rgba(74, 222, 128, 0.02) 50%,
+      transparent 70%
+    );
+  }
+}
+
+/* Classes utilitárias para efeitos sutis */
+.subtle-glow {
+  animation: subtleGlow 3s ease-in-out infinite;
+}
+
+.subtle-text-glow {
+  animation: subtleTextGlow 3s ease-in-out infinite;
+}
+
+.radial-pulse {
+  animation: radialPulse 3s ease-in-out infinite;
+}
+
+/* Transições suaves */
+.smooth-transition {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Gradientes radiais para hover states */
+.hover-radial {
+  transition: background 0.3s ease;
+}
+
+.hover-radial:hover {
+  background: radial-gradient(circle at center, rgba(74, 222, 128, 0.04) 0%, transparent 70%) !important;
+}
+
+/* Scrollbar customizada */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--surface-variant);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--outline);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--outline-variant);
+}
+
+/* Material-UI overrides */
+.MuiPaper-root {
+  background-color: var(--surface-container) !important;
+  color: var(--on-surface) !important;
+}
+
+.MuiAppBar-root {
+  background-color: var(--surface-container) !important;
+  color: var(--on-surface) !important;
+}
+
+.MuiDrawer-paper {
+  background-color: var(--surface-container) !important;
+  color: var(--on-surface) !important;
+  border-right: 1px solid var(--outline-variant) !important;
+}
+
+.MuiButton-root {
+  text-transform: none !important;
+}
+
+.MuiTab-root {
+  color: var(--on-surface-variant) !important;
+}
+
+.MuiTab-root.Mui-selected {
+  color: var(--primary) !important;
+}
+
+.MuiTabs-indicator {
+  background-color: var(--primary) !important;
+}
+
+.MuiTextField-root .MuiOutlinedInput-root {
+  background-color: var(--surface-variant);
+}
+
+.MuiTextField-root .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
+  border-color: var(--outline-variant);
+}
+
+.MuiTextField-root .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+  border-color: var(--outline);
+}
+
+.MuiTextField-root .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: var(--primary);
+}
+
+.MuiTextField-root .MuiInputLabel-root {
+  color: var(--on-surface-variant);
+}
+
+.MuiTextField-root .MuiInputBase-input {
+  color: var(--on-surface);
+}
+
+.MuiMenu-paper {
+  background-color: var(--surface-container-high) !important;
+  border: 1px solid var(--outline-variant) !important;
+}
+
+.MuiMenuItem-root {
+  color: var(--on-surface) !important;
+}
+
+.MuiMenuItem-root:hover {
+  background-color: var(--surface-container-highest) !important;
+}
+
+.MuiDialog-paper {
+  background-color: var(--surface-container-high) !important;
+  color: var(--on-surface) !important;
+}
+
+.MuiCheckbox-root {
+  color: var(--on-surface-variant) !important;
+}
+
+.MuiCheckbox-root.Mui-checked {
+  color: var(--primary) !important;
+}
+
+.MuiRadio-root {
+  color: var(--on-surface-variant) !important;
+}
+
+.MuiRadio-root.Mui-checked {
+  color: var(--primary) !important;
+}
+
+.MuiFormLabel-root {
+  color: var(--on-surface-variant) !important;
+}
+
+.MuiFormLabel-root.Mui-focused {
+  color: var(--primary) !important;
+}
+
+/* Recharts OLED overrides */
+.recharts-wrapper {
+  background-color: #000000 !important;
+}
+
+.recharts-cartesian-grid line {
+  stroke: #333333 !important;
+}
+
+.recharts-text {
+  fill: #ffffff !important;
+}
+
+.recharts-legend-wrapper {
+  color: #ffffff !important;
+}
+
+.recharts-tooltip-wrapper {
+  background-color: #000000 !important;
+  border: 1px solid #4ade80 !important;
+  border-radius: 8px !important;
+  color: #ffffff !important;
+}
+
+.recharts-default-tooltip {
+  background-color: #000000 !important;
+  border: 1px solid #4ade80 !important;
+  color: #ffffff !important;
+}
+
+/* Forçar fundo preto em todos os gráficos */
+.recharts-surface {
+  background-color: #000000 !important;
+}
+
+/* SVG backgrounds para gráficos */
+svg {
+  background-color: transparent !important;
+}
+
+/* Chart containers */
+.chart-container {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+/* Material-UI Chart overrides para OLED */
+.MuiChart-root {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+.MuiChart-tooltip {
+  background-color: #000000 !important;
+  border: 1px solid #4ade80 !important;
+  color: #ffffff !important;
+}
