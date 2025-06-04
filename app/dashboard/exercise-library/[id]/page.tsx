@@ -1,7 +1,8 @@
 "use client"
 
 import { useState } from "react"
-import { useParams, useRouter } from "next/navigation"
+import { useRouter, useParams } from "next/navigation"
+import { ArrowLeft } from "lucide-react"
 import { motion } from "framer-motion"
 
 // Componentes MD3 personalizados
@@ -13,9 +14,6 @@ import { Chip } from "@/components/md3/chip"
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-
-// Ícones
-import { ArrowLeft, Edit, Copy, Calendar, Users, Plus, Video, Info, ArrowUpDown } from "lucide-react"
 
 // Tipos
 interface Exercise {
@@ -587,4 +585,18 @@ export default function WorkoutDetail() {
                   >
                     <div className="text-center py-12">
                       <Calendar className="h-12 w-12 mx-auto mb-2 text-muted-foreground" />
-                      <h3 className="text-lg font-medium mb-2\">Configurações</h3>
+                      <h3 className="text-lg font-medium mb-2">Configurações</h3>
+                    </div>
+                  </motion.div>
+                </TabsContent>
+              </div>
+            </Tabs>
+          </Card>
+        </div>
+      </div>
+
+      {renderExerciseDialog()}
+      {renderAssignDialog()}
+    </div>
+  )
+}

@@ -3,9 +3,11 @@
 import type React from "react"
 import { useState } from "react"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
 import { Home, Dumbbell, Target, TrendingUp, User, Settings, Menu, X } from "lucide-react"
+import { usePathname } from "next/navigation"
 import { useMobile } from "@/hooks/use-mobile"
+import { useStudentSelector } from "@/hooks/use-student-selector"
+import MobileStudentSelector from "@/components/md3/mobile-student-selector"
 
 const navigation = [
   { name: "Início", href: "/client", icon: Home },
@@ -23,9 +25,18 @@ export default function ClientLayout({
   const pathname = usePathname()
   const isMobile = useMobile()
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const { students, selectedStudent, isOpen, open, close, selectStudent } = useStudentSelector()
 
   return (
     <div className="min-h-screen bg-black">
+      <MobileStudentSelector 
+        open={isOpen}
+        onClose={close}
+        students={students}
+        selectedStudentId={selectedStudent?.id || null}
+        onStudentSelect={selectStudent}
+      />
+
       {/* Mobile sidebar overlay */}
       {isMobile && sidebarOpen && (
         <div className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm" onClick={() => setSidebarOpen(false)} />
@@ -87,18 +98,27 @@ export default function ClientLayout({
           <div className="p-4 border-t border-gray-800">
             <div className="flex items-center gap-3 p-3 bg-gray-900/50 rounded-xl">
               <div className="w-10 h-10 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center text-white font-bold">
-                A
+                {selectedStudent ? selectedStudent.name[0] : "A"}
               </div>
               <div className="flex-1">
-                <p className="text-white font-medium text-sm">Ana Carolina</p>
+                <p className="text-white font-medium text-sm">
+                  {selectedStudent ? selectedStudent.name : "Selecionar Aluno"}
+                </p>
                 <p className="text-gray-400 text-xs">Personal: Dr. Silva</p>
               </div>
-              <Link href="/client/settings" className="p-2 text-gray-400 hover:text-white transition-colors">
-                <Settings className="w-4 h-4" />
-              </Link>
+              <div className="flex items-center gap-2">
+                <Link href="/client/settings" className="p-2 text-gray-400 hover:text-white transition-colors">
+                  <Settings className="w-4 h-4" />
+                </Link>
+                <button 
+                  onClick={open}
+                  className="p-2 text-green-500 hover:text-green-400 transition-colors"
+                >
+                  <User className="w-4 h-4" />
+                </button>
+              </div>
             </div>
           </div>
-        </div>
       </div>
 
       {/* Main content */}
@@ -120,7 +140,9 @@ export default function ClientLayout({
         )}
 
         {/* Page content */}
-        <main className="p-4 lg:p-8">{children}</main>
+        <main className="p-4 lg:p-8">
+          {children}
+        </main>
       </div>
 
       {/* Mobile bottom navigation com efeito neon refinado */}

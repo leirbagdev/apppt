@@ -1,247 +1,52 @@
-:root {
-  /* Tema Cinza Escuro (Padrão) */
-  --primary: #4ade80;
-  --on-primary: #003910;
-  --primary-container: #005d1a;
-  --on-primary-container: #7cf894;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-  --secondary: #60a5fa;
-  --on-secondary: #001d36;
-  --secondary-container: #00344f;
-  --on-secondary-container: #c2e7ff;
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 142.1 76.2% 36.3%;
+    --primary-foreground: 355.7 100% 97.3%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 142.1 76.2% 36.3%;
+    --radius: 0.5rem;
+  }
 
-  --tertiary: #a78bfa;
-  --on-tertiary: #2d1b69;
-  --tertiary-container: #443382;
-  --on-tertiary-container: #e4dfff;
-
-  --error: #ef4444;
-  --on-error: #690005;
-  --error-container: #93000a;
-  --on-error-container: #ffdad6;
-
-  --success: #22c55e;
-  --on-success: #003910;
-  --success-container: #005d1a;
-  --on-success-container: #7cf894;
-
-  --warning: #f59e0b;
-  --on-warning: #452b00;
-  --warning-container: #633f00;
-  --on-warning-container: #ffdf9c;
-
-  --surface: #1a1a1a;
-  --on-surface: #e7e7e7;
-  --surface-variant: #2a2a2a;
-  --on-surface-variant: #c7c7c7;
-  --surface-container: #262626;
-  --surface-container-high: #333333;
-  --surface-container-highest: #404040;
-
-  --outline: #525252;
-  --outline-variant: #404040;
-  --shadow: #000000;
-  --scrim: #000000;
-
-  --inverse-surface: #e7e7e7;
-  --inverse-on-surface: #1a1a1a;
-  --inverse-primary: #22c55e;
-}
-
-[data-theme="black"] {
-  --primary: #4ade80;
-  --on-primary: #003910;
-  --primary-container: #005d1a;
-  --on-primary-container: #7cf894;
-
-  --secondary: #60a5fa;
-  --on-secondary: #001d36;
-  --secondary-container: #00344f;
-  --on-secondary-container: #c2e7ff;
-
-  --tertiary: #a78bfa;
-  --on-tertiary: #2d1b69;
-  --tertiary-container: #443382;
-  --on-tertiary-container: #e4dfff;
-
-  --error: #ef4444;
-  --on-error: #690005;
-  --error-container: #93000a;
-  --on-error-container: #ffdad6;
-
-  --success: #22c55e;
-  --on-success: #003910;
-  --success-container: #005d1a;
-  --on-success-container: #7cf894;
-
-  --warning: #f59e0b;
-  --on-warning: #452b00;
-  --warning-container: #633f00;
-  --on-warning-container: #ffdf9c;
-
-  --surface: #000000;
-  --on-surface: #ffffff;
-  --surface-variant: #0a0a0a;
-  --on-surface-variant: #e0e0e0;
-  --surface-container: #1a1a1a;
-  --surface-container-high: #262626;
-  --surface-container-highest: #333333;
-
-  --outline: #404040;
-  --outline-variant: #2a2a2a;
-  --shadow: #000000;
-  --scrim: #000000;
-
-  --inverse-surface: #ffffff;
-  --inverse-on-surface: #000000;
-  --inverse-primary: #22c55e;
-}
-
-[data-theme="darkGray"] {
-  --primary: #4ade80;
-  --on-primary: #003910;
-  --primary-container: #005d1a;
-  --on-primary-container: #7cf894;
-
-  --secondary: #60a5fa;
-  --on-secondary: #001d36;
-  --secondary-container: #00344f;
-  --on-secondary-container: #c2e7ff;
-
-  --tertiary: #a78bfa;
-  --on-tertiary: #2d1b69;
-  --tertiary-container: #443382;
-  --on-tertiary-container: #e4dfff;
-
-  --error: #ef4444;
-  --on-error: #690005;
-  --error-container: #93000a;
-  --on-error-container: #ffdad6;
-
-  --success: #22c55e;
-  --on-success: #003910;
-  --success-container: #005d1a;
-  --on-success-container: #7cf894;
-
-  --warning: #f59e0b;
-  --on-warning: #452b00;
-  --warning-container: #633f00;
-  --on-warning-container: #ffdf9c;
-
-  --surface: #1f2937;
-  --on-surface: #f9fafb;
-  --surface-variant: #374151;
-  --on-surface-variant: #e5e7eb;
-  --surface-container: #374151;
-  --surface-container-high: #4b5563;
-  --surface-container-highest: #6b7280;
-
-  --outline: #6b7280;
-  --outline-variant: #4b5563;
-  --shadow: #000000;
-  --scrim: #000000;
-
-  --inverse-surface: #f9fafb;
-  --inverse-on-surface: #1f2937;
-  --inverse-primary: #22c55e;
-}
-
-[data-theme="white"] {
-  --primary: #16a34a;
-  --on-primary: #ffffff;
-  --primary-container: #dcfce7;
-  --on-primary-container: #14532d;
-
-  --secondary: #2563eb;
-  --on-secondary: #ffffff;
-  --secondary-container: #dbeafe;
-  --on-secondary-container: #1e3a8a;
-
-  --tertiary: #7c3aed;
-  --on-tertiary: #ffffff;
-  --tertiary-container: #ede9fe;
-  --on-tertiary-container: #581c87;
-
-  --error: #dc2626;
-  --on-error: #ffffff;
-  --error-container: #fecaca;
-  --on-error-container: #7f1d1d;
-
-  --success: #16a34a;
-  --on-success: #ffffff;
-  --success-container: #dcfce7;
-  --on-success-container: #14532d;
-
-  --warning: #d97706;
-  --on-warning: #ffffff;
-  --warning-container: #fed7aa;
-  --on-warning-container: #92400e;
-
-  --surface: #ffffff;
-  --on-surface: #1f2937;
-  --surface-variant: #f9fafb;
-  --on-surface-variant: #6b7280;
-  --surface-container: #f3f4f6;
-  --surface-container-high: #e5e7eb;
-  --surface-container-highest: #d1d5db;
-
-  --outline: #d1d5db;
-  --outline-variant: #e5e7eb;
-  --shadow: #000000;
-  --scrim: #000000;
-
-  --inverse-surface: #1f2937;
-  --inverse-on-surface: #ffffff;
-  --inverse-primary: #4ade80;
-}
-
-[data-theme="offWhite"] {
-  --primary: #16a34a;
-  --on-primary: #ffffff;
-  --primary-container: #dcfce7;
-  --on-primary-container: #14532d;
-
-  --secondary: #2563eb;
-  --on-secondary: #ffffff;
-  --secondary-container: #dbeafe;
-  --on-secondary-container: #1e3a8a;
-
-  --tertiary: #7c3aed;
-  --on-tertiary: #ffffff;
-  --tertiary-container: #ede9fe;
-  --on-tertiary-container: #581c87;
-
-  --error: #dc2626;
-  --on-error: #ffffff;
-  --error-container: #fecaca;
-  --on-error-container: #7f1d1d;
-
-  --success: #16a34a;
-  --on-success: #ffffff;
-  --success-container: #dcfce7;
-  --on-success-container: #14532d;
-
-  --warning: #d97706;
-  --on-warning: #ffffff;
-  --warning-container: #fed7aa;
-  --on-warning-container: #92400e;
-
-  --surface: #f8fafc;
-  --on-surface: #0f172a;
-  --surface-variant: #f1f5f9;
-  --on-surface-variant: #475569;
-  --surface-container: #e2e8f0;
-  --surface-container-high: #cbd5e1;
-  --surface-container-highest: #94a3b8;
-
-  --outline: #cbd5e1;
-  --outline-variant: #e2e8f0;
-  --shadow: #000000;
-  --scrim: #000000;
-
-  --inverse-surface: #0f172a;
-  --inverse-on-surface: #f8fafc;
-  --inverse-primary: #4ade80;
+  .dark {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+    --card: 0 0% 0%;
+    --card-foreground: 0 0% 100%;
+    --popover: 0 0% 0%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 142.1 70.6% 45.3%;
+    --primary-foreground: 144.9 80.4% 10%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 12 6.5% 15.1%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 85.7% 97.3%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 142.1 76.2% 36.3%;
+  }
 }
 
 * {
@@ -260,10 +65,10 @@ body {
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
-    "Droid Sans", "Helvetica Neue", sans-serif;
+  font-feature-settings: "rlig" 1, "calt" 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 a {

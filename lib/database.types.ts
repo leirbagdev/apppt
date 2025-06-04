@@ -142,9 +142,15 @@ export interface Database {
 }
 
 export type Student = Database["public"]["Tables"]["students"]["Row"]
-export type StudentInsert = Database["public"]["Tables"]["students"]["Insert"]
-export type StudentUpdate = Database["public"]["Tables"]["students"]["Update"]
+export type CreateStudentData = Database["public"]["Tables"]["students"]["Insert"]
+export type UpdateStudentData = Database["public"]["Tables"]["students"]["Update"]
 
 export type Workout = Database["public"]["Tables"]["workouts"]["Row"]
 export type WorkoutInsert = Database["public"]["Tables"]["workouts"]["Insert"]
 export type WorkoutUpdate = Database["public"]["Tables"]["workouts"]["Update"]
+
+export interface StudentSelectorStudent {
+  id: string
+  name: string
+  avatarUrl?: string
+}

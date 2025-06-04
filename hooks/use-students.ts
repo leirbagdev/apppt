@@ -2,12 +2,14 @@
 
 import { useState, useEffect } from "react"
 import { StudentsService } from "@/lib/services/students"
-import type { Student, CreateStudentData, UpdateStudentData } from "@/lib/database.types"
+import type { Student, CreateStudentData, UpdateStudentData, StudentSelectorStudent } from "@/lib/database.types"
 
 export function useStudents() {
   const [students, setStudents] = useState<Student[]>([])
+  const [selectedStudent, setSelectedStudent] = useState<Student | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [studentSelectorOpen, setStudentSelectorOpen] = useState(false)
 
   const loadStudents = async () => {
     try {
@@ -77,8 +79,26 @@ export function useStudents() {
     }
   }
 
+  const openStudentSelector = () => setStudentSelectorOpen(true)
+  const closeStudentSelector = () => setStudentSelectorOpen(false)
+
+  const selectStudent = (studentId: string) => {
+    const student = students.find(s => s.id === studentId)
+    setSelectedStudent(student || null)
+    closeStudentSelector()
+  }
+
   return {
-    students,
+    students: students.map(s => ({
+      id: s.id,
+      name: s.full_name,
+      avatarUrl: s.avatar_url
+    })) as StudentSelectorStudent[],
+    selectedStudent,
+    selectStudent,
+    studentSelectorOpen,
+    openStudentSelector,
+    closeStudentSelector,
     loading,
     error,
     createStudent,

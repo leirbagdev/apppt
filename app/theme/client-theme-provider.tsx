@@ -25,13 +25,14 @@ export default function ClientThemeProvider({ children }: { children: React.Reac
   }
 
   return (
-    <ThemeProvider
-      onThemeChange={() => {
-        setIsChanging(true)
-        setTimeout(() => setIsChanging(false), 400)
-      }}
-    >
-      <div className={isChanging ? "theme-transition" : ""}>{children}</div>
-    </ThemeProvider>
+    <div className="contents">
+      <ThemeProvider>
+        <div className={`${isChanging ? "theme-transition" : ""}`}>
+          <main className="relative flex min-h-screen flex-col bg-background">
+            {children}
+          </main>
+        </div>
+      </ThemeProvider>
+    </div>
   )
 }

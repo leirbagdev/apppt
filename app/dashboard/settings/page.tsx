@@ -14,12 +14,42 @@ import {
   Lock,
   Database,
   Phone,
+  LogOut,
 } from "lucide-react"
+import { useRouter } from "next/navigation"
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+import type { SupabaseClient } from '@supabase/auth-helpers-nextjs'
 import { Avatar } from "@/components/md3/avatar"
 
-type SettingsPageProps = {}
+interface BaseSettingItem {
+  label: string
+  description: string
+  icon?: React.ReactNode
+  className?: string
+}
 
-export default function SettingsPage({}: SettingsPageProps) {
+interface ToggleSettingItem extends BaseSettingItem {
+  type: "toggle"
+  value: boolean
+  onChange: (value: boolean) => void
+}
+
+interface ButtonSettingItem extends BaseSettingItem {
+  type: "button"
+  onClick?: () => void | Promise<void>
+}
+
+type SettingItem = ToggleSettingItem | ButtonSettingItem
+
+interface SettingsSection {
+  title: string
+  icon: React.ReactNode
+  items: SettingItem[]
+}
+
+export default function SettingsPage() {
+  const router = useRouter()
+  const supabase = createClientComponentClient()
   const [darkMode, setDarkMode] = useState(true)
   const [notifications, setNotifications] = useState(true)
   const [showEditProfile, setShowEditProfile] = useState(false)
@@ -33,7 +63,12 @@ export default function SettingsPage({}: SettingsPageProps) {
     avatar: "/placeholder.svg?height=100&width=100&text=CS",
   })
 
-  const settingsSections = [
+  const handleLogout = async () => {
+    await supabase.auth.signOut()
+    router.push("/auth/login")
+  }
+
+  const settingsSections: SettingsSection[] = [
     {
       title: "Preferências",
       icon: <Settings className="w-5 h-5" />,
@@ -120,6 +155,20 @@ export default function SettingsPage({}: SettingsPageProps) {
         },
       ],
     },
+    {
+      title: "Conta",
+      icon: <LogOut className="w-5 h-5" />,
+      items: [
+        {
+          label: "Sair da conta",
+          description: "Fazer logout do sistema",
+          type: "button",
+          icon: <LogOut className="w-4 h-4" />,
+          onClick: handleLogout,
+          className: "text-red-500",
+        },
+      ],
+    },
   ]
 
   const handleSaveProfile = () => {
@@ -182,29 +231,42 @@ export default function SettingsPage({}: SettingsPageProps) {
                   className="flex items-center justify-between py-3 border-b border-gray-800 last:border-b-0"
                 >
                   <div className="flex items-center gap-3">
-                    {item.icon && <div className="text-gray-400">{item.icon}</div>}
+                    {item.icon && (
+                      <div className={item.className ? item.className : "text-gray-400"}>
+                        {item.icon}
+                      </div>
+                    )}
                     <div>
-                      <p className="text-white font-medium">{item.label}</p>
+                      <p className={`font-medium ${item.className || 'text-white'}`}>
+                        {item.label}
+                      </p>
                       <p className="text-gray-400 text-sm">{item.description}</p>
                     </div>
                   </div>
 
                   {item.type === "toggle" ? (
                     <button
-                      onClick={() => item.onChange && item.onChange(!item.value)}
+                      onClick={() => ('onChange' in item) && item.onChange(!item.value)}
                       className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                        item.value ? "bg-emerald-500" : "bg-gray-600"
+                        ('value' in item && item.value) ? "bg-emerald-500" : "bg-gray-600"
                       }`}
                     >
                       <span
                         className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                          item.value ? "translate-x-6" : "translate-x-1"
+                          ('value' in item && item.value) ? "translate-x-6" : "translate-x-1"
                         }`}
                       />
                     </button>
                   ) : (
-                    <button className="text-emerald-400 hover:text-emerald-300 transition-colors">
-                      <Edit3 className="w-4 h-4" />
+                    <button 
+                      onClick={() => ('onClick' in item) && item.onClick?.()}
+                      className={`${item.className || 'text-emerald-400 hover:text-emerald-300'} transition-colors`}
+                    >
+                      {item.className ? (
+                        <LogOut className="w-4 h-4" />
+                      ) : (
+                        <Edit3 className="w-4 h-4" />
+                      )}
                     </button>
                   )}
                 </div>

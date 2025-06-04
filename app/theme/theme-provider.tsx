@@ -18,11 +18,11 @@ const themeOptions = {
   oled: {
     name: "OLED",
     primary: {
-      main: "#10B981",
-      dark: "#059669",
-      light: "#34D399",
+      main: "#22c55e",
+      dark: "#16a34a",
+      light: "#4ade80",
       contrastText: "#FFFFFF",
-      gradient: "linear-gradient(135deg, #10B981 0%, #34D399 100%)",
+      gradient: "linear-gradient(135deg, #22c55e 0%, #4ade80 100%)",
     },
     secondary: {
       main: "#34D399",
@@ -74,8 +74,10 @@ export function useTheme() {
 
 export function ThemeProvider({
   children,
+  onThemeChange,
 }: {
   children: React.ReactNode
+  onThemeChange?: () => void
 }) {
   const [mounted, setMounted] = useState(false)
   const mode: ThemeMode = "oled" // Sempre OLED
@@ -216,15 +218,16 @@ export function ThemeProvider({
   useEffect(() => {
     if (typeof window !== "undefined" && mounted) {
       const root = document.documentElement
-      root.style.setProperty("--primary-color", currentTheme.primary.main)
-      root.style.setProperty("--secondary-color", currentTheme.secondary.main)
-      root.style.setProperty("--background-default", currentTheme.background.default)
-      root.style.setProperty("--background-paper", currentTheme.background.paper)
-      root.style.setProperty("--text-primary", currentTheme.text.primary)
-      root.style.setProperty("--text-secondary", currentTheme.text.secondary)
-      root.style.setProperty("--primary-gradient", currentTheme.primary.gradient)
-      root.style.setProperty("--surface-main", currentTheme.surface.main)
-      root.style.setProperty("--surface-light", currentTheme.surface.light)
+      root.style.setProperty("--background", "0 0% 0%")
+      root.style.setProperty("--foreground", "0 0% 100%")
+      root.style.setProperty("--primary", "142.1 70.6% 45.3%")
+      root.style.setProperty("--primary-foreground", "144.9 80.4% 10%")
+      root.style.setProperty("--secondary", "217.2 32.6% 17.5%")
+      root.style.setProperty("--secondary-foreground", "210 40% 98%")
+      root.style.setProperty("--muted", "0 0% 15%")
+      root.style.setProperty("--muted-foreground", "240 5% 64.9%")
+      root.style.setProperty("--accent", "12 6.5% 15.1%")
+      root.style.setProperty("--accent-foreground", "0 0% 98%")
 
       // Novas variáveis para o seletor de alunos
       root.style.setProperty("--surface-container", currentTheme.surface.main)
@@ -266,7 +269,9 @@ export function ThemeProvider({
     <ThemeContext.Provider value={contextValue}>
       <MuiThemeProvider theme={theme}>
         <CssBaseline />
-        {children}
+        <div className="h-full bg-background antialiased">
+          {children}
+        </div>
       </MuiThemeProvider>
     </ThemeContext.Provider>
   )
