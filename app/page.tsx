@@ -300,7 +300,7 @@ export default function LandingPage() {
       </header>
 
       {/* Hero Section */}
-      <section className="pt-32 pb-20 px-6 relative">
+      <section className="pt-32 pb-20 px-6 relative mb-12 md:mb-24">
         <div className="max-w-7xl mx-auto text-center" style={{ transform: `translateY(${parallaxOffset}px)` }}>
           <FadeIn duration={800}>
             <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white via-green-100 to-green-300 bg-clip-text text-transparent">
@@ -310,14 +310,14 @@ export default function LandingPage() {
             </h1>
           </FadeIn>
 
-          <FadeIn delay={200} duration={800}>
+          <FadeIn delay={100} duration={700}>
             <p className="text-xl md:text-2xl text-gray-200 mb-8 max-w-3xl mx-auto leading-relaxed font-light">
               Transforme sua carreira com a plataforma mais avançada para personal trainers. Gerencie alunos, treinos e
               resultados em um só lugar.
             </p>
           </FadeIn>
 
-          <FadeIn delay={400} duration={800}>
+          <FadeIn delay={200} duration={700}>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
               <MagneticButton strength={0.2}>
                 <Link
@@ -336,7 +336,7 @@ export default function LandingPage() {
           </FadeIn>
 
           {/* Animated Stats */}
-          <FadeIn delay={600} duration={800}>
+          <FadeIn delay={0} duration={700}>
             <StaggerContainer className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto" staggerDelay={150}>
               {stats.map((stat, index) => (
                 <div key={index} className="text-center group hover:scale-105 transition-transform duration-300">
@@ -354,7 +354,7 @@ export default function LandingPage() {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="py-20 px-6 bg-gray-900/50 relative">
+      <section id="features" className="py-20 px-6 bg-gray-900/50 relative mb-12 md:mb-24">
         <div className="max-w-7xl mx-auto">
           <FadeIn>
             <div className="text-center mb-16">
@@ -387,7 +387,7 @@ export default function LandingPage() {
       </section>
 
       {/* Benefits Section */}
-      <section id="benefits" className="py-20 px-6">
+      <section id="benefits" className="py-20 px-6 mb-12 md:mb-24">
         <div className="max-w-7xl mx-auto">
           <FadeIn>
             <div className="text-center mb-16">
@@ -439,7 +439,7 @@ export default function LandingPage() {
       </section>
 
       {/* Testimonials Section */}
-      <section id="testimonials" className="py-20 px-6 bg-gray-900/50">
+      <section id="testimonials" className="py-20 px-6 bg-gray-900/50 mb-12 md:mb-24">
         <div className="max-w-7xl mx-auto">
           <FadeIn>
             <div className="text-center mb-16">
@@ -489,7 +489,7 @@ export default function LandingPage() {
       </section>
 
       {/* Pricing Section */}
-      <section id="pricing" className="py-20 px-6">
+      <section id="pricing" className="py-20 px-6 mb-12 md:mb-24">
         <div className="max-w-7xl mx-auto">
           <FadeIn>
             <div className="text-center mb-16">
@@ -655,7 +655,7 @@ export default function LandingPage() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 px-6 bg-gray-900/50">
+      <section id="contact" className="py-20 px-6 bg-gray-900/50 mb-12 md:mb-24">
         <div className="max-w-4xl mx-auto">
           <FadeIn>
             <div className="text-center mb-16">
@@ -668,7 +668,7 @@ export default function LandingPage() {
             </div>
           </FadeIn>
 
-          <FadeIn delay={200}>
+          <FadeIn delay={100}>
             <div className="bg-gray-800/50 p-8 rounded-2xl border border-gray-700">
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-6">
@@ -837,7 +837,7 @@ export default function LandingPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 px-6 bg-gradient-to-r from-green-600 to-green-500 relative overflow-hidden">
+      <section className="py-20 px-6 bg-gradient-to-r from-green-600 to-green-500 relative overflow-hidden mb-12 md:mb-24">
         <div className="absolute inset-0 bg-black/20"></div>
         <FadeIn>
           <div className="max-w-4xl mx-auto text-center relative z-10">
@@ -875,7 +875,7 @@ export default function LandingPage() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 py-12 px-6">
+      <footer className="bg-gray-900 py-12 px-6 mt-12 md:mt-24">
         <div className="max-w-7xl mx-auto">
           <StaggerContainer className="grid md:grid-cols-4 gap-8" staggerDelay={100}>
             <div>

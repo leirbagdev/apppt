@@ -4,6 +4,8 @@ import type React from "react"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
+import { supabase } from "@/lib/supabase"
+import { toast } from "@/hooks/use-toast"
 
 export default function RegisterPage() {
   const router = useRouter()
@@ -16,18 +18,89 @@ export default function RegisterPage() {
     acceptTerms: false,
   })
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
     if (formData.password !== formData.confirmPassword) {
-      alert("As senhas não coincidem")
+      toast({
+        title: "Erro",
+        description: "As senhas não coincidem.",
+        variant: "destructive",
+      })
       return
     }
 
     if (!formData.acceptTerms) {
-      alert("Você deve aceitar os termos de uso")
+      toast({
+        title: "Erro",
+        description: "Você deve aceitar os termos de uso.",
+        variant: "destructive",
+      })
       return
     }
+
+    // Criação do usuário no Supabase Auth
+    const { data, error } = await supabase.auth.signUp({
+      email: formData.email,
+      password: formData.password,
+    })
+
+    if (error) {
+      toast({
+        title: "Erro ao criar conta",
+        description: error.message,
+        variant: "destructive",
+      })
+      return
+    }
+
+    // Após criar o usuário, insere na tabela correta
+    const { user } = data
+    if (user) {
+      let insertError = null
+      if (formData.userType === "trainer") {
+        const { error: trainerError } = await supabase.from("trainers").insert({
+          full_name: formData.name,
+          email: formData.email,
+          // Adicione outros campos obrigatórios para trainers aqui
+          created_at: new Date().toISOString(),
+        })
+        insertError = trainerError
+      } else {
+        const { error: studentError } = await supabase.from("students").insert({
+          full_name: formData.name,
+          email: formData.email,
+          phone: "",
+          birth_date: new Date().toISOString().slice(0, 10),
+          emergency_contact: formData.name,
+          emergency_phone: "",
+          height: 170,
+          weight: 70,
+          objectives: ["Saúde geral"],
+          experience_level: "iniciante",
+          plan: "basic",
+          frequency: 1,
+          start_date: new Date().toISOString().slice(0, 10),
+          payment_method: "pix",
+          status: "active",
+        })
+        insertError = studentError
+      }
+      if (insertError) {
+        toast({
+          title: "Erro ao salvar dados do usuário",
+          description: insertError.message,
+          variant: "destructive",
+        })
+        return
+      }
+    }
+
+    toast({
+      title: "Conta criada com sucesso!",
+      description: "Redirecionando...",
+      variant: "default",
+    })
 
     // Redirecionar baseado no tipo de usuário
     if (formData.userType === "trainer") {
@@ -174,11 +247,11 @@ export default function RegisterPage() {
             />
             <label htmlFor="acceptTerms" className="text-sm text-gray-300">
               Aceito os{" "}
-              <Link href="#" className="text-green-500 hover:text-green-400">
+              <Link href="/termos" className="text-green-500 hover:text-green-400" target="_blank">
                 termos de uso
               </Link>{" "}
               e{" "}
-              <Link href="#" className="text-green-500 hover:text-green-400">
+              <Link href="/politica-de-privacidade" className="text-green-500 hover:text-green-400" target="_blank">
                 política de privacidade
               </Link>
             </label>
