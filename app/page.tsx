@@ -162,8 +162,8 @@ export default function LandingPage() {
   const features = [
     {
       icon: Users,
-      title: "Gestão Completa de Alunos",
-      description: "Organize todos os seus alunos em um só lugar com perfis detalhados e histórico completo.",
+      title: "Gerenciamento Simples",
+      description: "Controle seus alunos de forma prática e rápida.",
     },
     {
       icon: Calendar,
@@ -208,23 +208,20 @@ export default function LandingPage() {
   const testimonials = [
     {
       name: "Carlos Silva",
-      role: "Personal Trainer",
-      image: "/placeholder.svg?height=60&width=60&text=CS",
-      content: "Revolucionou minha forma de trabalhar. Consegui dobrar minha cartela de alunos mantendo a qualidade.",
+      role: "Treinador",
+      content: "Revolucionou minha forma de trabalhar.",
       rating: 5,
     },
     {
       name: "Ana Costa",
       role: "Treinadora Funcional",
-      image: "/placeholder.svg?height=60&width=60&text=AC",
-      content: "O melhor investimento que fiz para meu negócio. Interface intuitiva e suporte excepcional.",
+      content: "O melhor investimento que fiz para meu negócio. Muito intuitivo e suporte excepcional.",
       rating: 5,
     },
     {
       name: "Roberto Lima",
-      role: "Personal Trainer",
-      image: "/placeholder.svg?height=60&width=60&text=RL",
-      content: "Meus alunos adoram o app. Conseguem acompanhar tudo e isso aumentou muito o engajamento.",
+      role: "Treinador",
+      content: "Consigo acompanhar tudo e isso aumentou muito o envolvimento com meus alunos.",
       rating: 5,
     },
   ]
@@ -287,12 +284,14 @@ export default function LandingPage() {
                 Entrar
               </Link>
               <MagneticButton>
-                <Link
-                  href="/auth/register"
+                <a
+                  href="https://wa.me/55041991952303?text=Olá! Gostaria%20de%20solicitar%20acesso%20à%20plataforma."
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-full font-medium transition-all duration-300 hover:shadow-lg hover:shadow-green-500/25"
                 >
-                  Começar Grátis
-                </Link>
+                  Solicitar Acesso
+                </a>
               </MagneticButton>
             </div>
           </FadeIn>
@@ -300,33 +299,34 @@ export default function LandingPage() {
       </header>
 
       {/* Hero Section */}
-      <section className="pt-32 pb-20 px-6 relative mb-12 md:mb-24">
+      <section className="pt-40 pb-28 px-4 sm:px-8 md:px-16 relative mb-20 md:mb-32">
         <div className="max-w-7xl mx-auto text-center" style={{ transform: `translateY(${parallaxOffset}px)` }}>
           <FadeIn duration={800}>
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white via-green-100 to-green-300 bg-clip-text text-transparent">
-              Gerencie seus clientes e treinos
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white via-green-100 to-green-300 bg-clip-text text-transparent leading-tight md:leading-[1.15]">
+              Apto para treinadores
               <br />
-              <span className="text-green-400 animate-pulse">de forma inteligente</span>
+              <span className="text-green-400 animate-pulse">Gestão de forma prática e rápida</span>
             </h1>
           </FadeIn>
 
           <FadeIn delay={100} duration={700}>
             <p className="text-xl md:text-2xl text-gray-200 mb-8 max-w-3xl mx-auto leading-relaxed font-light">
-              Transforme sua carreira com a plataforma mais avançada para personal trainers. Gerencie alunos, treinos e
-              resultados em um só lugar.
+              
             </p>
           </FadeIn>
 
           <FadeIn delay={200} duration={700}>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
               <MagneticButton strength={0.2}>
-                <Link
-                  href="/auth/register"
+                <a
+                  href="https://wa.me/55041991952303?text=Olá! Gostaria%20de%20solicitar%20acesso%20à%20plataforma."
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 hover:scale-105 flex items-center gap-2 shadow-lg shadow-green-500/25 hover:shadow-green-500/40"
                 >
-                  Começar Gratuitamente
+                  Solicitar Acesso
                   <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-                </Link>
+                </a>
               </MagneticButton>
 
               <MagneticButton strength={0.1}>
@@ -344,7 +344,7 @@ export default function LandingPage() {
                     <AnimatedCounter end={stat.number} suffix={stat.suffix} duration={2000 + index * 200} />
                   </div>
                   <div className="text-gray-200 group-hover:text-gray-100 transition-colors font-medium">
-                    {stat.label}
+                    {stat.label.charAt(0).toUpperCase() + stat.label.slice(1)}
                   </div>
                 </div>
               ))}
@@ -354,14 +354,18 @@ export default function LandingPage() {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="py-20 px-6 bg-gray-900/50 relative mb-12 md:mb-24">
+      <section id="features" className="py-28 px-4 sm:px-8 md:px-16 bg-gray-900/50 relative mb-20 md:mb-32">
         <div className="max-w-7xl mx-auto">
           <FadeIn>
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold mb-6">
-                Recursos que <span className="text-green-400">Revolucionam</span>
+            <div className="text-center mb-16 relative flex flex-col items-center justify-center">
+              {/* Fundo escuro translúcido para melhorar contraste */}
+              <div className="absolute inset-0 flex items-center justify-center z-0">
+                <div className="bg-black/70 rounded-2xl w-full h-full max-w-2xl mx-auto" style={{filter: 'blur(2px)'}}></div>
+              </div>
+              <h2 className="relative z-10 text-4xl md:text-5xl font-bold mb-6 drop-shadow-lg">
+                Recursos que <span className="text-green-400">revolucionam</span>
               </h2>
-              <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              <p className="relative z-10 text-xl text-gray-300 max-w-3xl mx-auto drop-shadow-md">
                 Tudo que você precisa para levar seu negócio de personal training ao próximo nível
               </p>
             </div>
@@ -375,10 +379,10 @@ export default function LandingPage() {
               >
                 <feature.icon className="w-12 h-12 text-green-400 mb-6 group-hover:scale-110 transition-transform duration-300 drop-shadow-lg" />
                 <h3 className="text-xl font-semibold mb-4 group-hover:text-green-300 transition-colors text-white">
-                  {feature.title}
+                  {feature.title.charAt(0).toUpperCase() + feature.title.slice(1)}
                 </h3>
                 <p className="text-gray-200 group-hover:text-gray-100 transition-colors leading-relaxed">
-                  {feature.description}
+                  {feature.description.charAt(0).toUpperCase() + feature.description.slice(1)}
                 </p>
               </div>
             ))}
@@ -387,12 +391,12 @@ export default function LandingPage() {
       </section>
 
       {/* Benefits Section */}
-      <section id="benefits" className="py-20 px-6 mb-12 md:mb-24">
+      <section id="benefits" className="py-28 px-4 sm:px-8 md:px-16 mb-20 md:mb-32">
         <div className="max-w-7xl mx-auto">
           <FadeIn>
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-bold mb-6">
-                Por que Escolher a <span className="text-green-400">APT</span>?
+                Por que escolher a <span className="text-green-400">APT</span>?
               </h2>
             </div>
           </FadeIn>
@@ -409,10 +413,10 @@ export default function LandingPage() {
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold mb-2 group-hover:text-green-300 transition-colors text-white">
-                      {benefit.title}
+                      {benefit.title.charAt(0).toUpperCase() + benefit.title.slice(1)}
                     </h3>
                     <p className="text-gray-200 group-hover:text-gray-100 transition-colors leading-relaxed">
-                      {benefit.description}
+                      {benefit.description.charAt(0).toUpperCase() + benefit.description.slice(1)}
                     </p>
                   </div>
                 </div>
@@ -439,12 +443,12 @@ export default function LandingPage() {
       </section>
 
       {/* Testimonials Section */}
-      <section id="testimonials" className="py-20 px-6 bg-gray-900/50 mb-12 md:mb-24">
+      <section id="testimonials" className="py-28 px-4 sm:px-8 md:px-16 bg-gray-900/50 mb-20 md:mb-32">
         <div className="max-w-7xl mx-auto">
           <FadeIn>
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-bold mb-6">
-                O que Nossos <span className="text-green-400">Clientes</span> Dizem
+                O que nossos <span className="text-green-400">clientes</span> dizem
               </h2>
             </div>
           </FadeIn>
@@ -466,20 +470,16 @@ export default function LandingPage() {
                 </div>
 
                 <p className="text-gray-200 mb-6 italic group-hover:text-gray-100 transition-colors leading-relaxed text-lg">
-                  "{testimonial.content}"
+                  "{testimonial.content.charAt(0).toUpperCase() + testimonial.content.slice(1)}"
                 </p>
 
                 <div className="flex items-center gap-3">
-                  <img
-                    src={testimonial.image || "/placeholder.svg"}
-                    alt={testimonial.name}
-                    className="w-12 h-12 rounded-full group-hover:scale-110 transition-transform duration-300 border-2 border-gray-600 group-hover:border-green-400/50"
-                  />
+                  {/* Removido o avatar para manter privacidade */}
                   <div>
                     <div className="font-semibold group-hover:text-green-300 transition-colors text-white">
                       {testimonial.name}
                     </div>
-                    <div className="text-sm text-gray-300">{testimonial.role}</div>
+                    <div className="text-sm text-gray-300">{testimonial.role.charAt(0).toUpperCase() + testimonial.role.slice(1)}</div>
                   </div>
                 </div>
               </div>
@@ -489,12 +489,12 @@ export default function LandingPage() {
       </section>
 
       {/* Pricing Section */}
-      <section id="pricing" className="py-20 px-6 mb-12 md:mb-24">
+      <section id="pricing" className="py-28 px-4 sm:px-8 md:px-16 mb-20 md:mb-32">
         <div className="max-w-7xl mx-auto">
           <FadeIn>
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-bold mb-6">
-                Planos que <span className="text-green-400">Cabem</span> no seu Bolso
+                Planos que <span className="text-green-400">cabem</span> no seu bolso
               </h2>
               <p className="text-xl text-gray-300">Comece grátis e escale conforme cresce</p>
             </div>
@@ -533,12 +533,14 @@ export default function LandingPage() {
               </ul>
 
               <MagneticButton className="w-full">
-                <Link
-                  href="/auth/register"
+                <a
+                  href="https://wa.me/55041991952303?text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20acesso%20%C3%A0%20plataforma."
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-full bg-gray-700 hover:bg-gray-600 text-white py-3 rounded-xl font-semibold transition-all duration-300 block text-center hover:shadow-lg border border-gray-600 hover:border-gray-500"
                 >
                   Começar Grátis
-                </Link>
+                </a>
               </MagneticButton>
             </div>
 
@@ -594,12 +596,14 @@ export default function LandingPage() {
               </ul>
 
               <MagneticButton className="w-full">
-                <Link
-                  href="/auth/register"
+                <a
+                  href="https://wa.me/55041991952303?text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20acesso%20%C3%A0%20plataforma."
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-full bg-green-500 hover:bg-green-400 text-black py-3 rounded-xl font-bold transition-all duration-300 block text-center hover:shadow-lg hover:shadow-green-500/40 border border-green-400"
                 >
                   Começar Teste Grátis
-                </Link>
+                </a>
               </MagneticButton>
             </div>
 
@@ -643,7 +647,9 @@ export default function LandingPage() {
 
               <MagneticButton className="w-full">
                 <a
-                  href="#contact"
+                  href="https://wa.me/55041991952303?text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20acesso%20%C3%A0%20plataforma."
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-full bg-gray-700 hover:bg-gray-600 text-white py-3 rounded-xl font-semibold transition-all duration-300 block text-center hover:shadow-lg border border-gray-600 hover:border-gray-500"
                 >
                   Entrar em Contato
@@ -655,15 +661,15 @@ export default function LandingPage() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 px-6 bg-gray-900/50 mb-12 md:mb-24">
+      <section id="contact" className="py-28 px-4 sm:px-8 md:px-16 bg-gray-900/50 mb-20 md:mb-32">
         <div className="max-w-4xl mx-auto">
           <FadeIn>
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-bold mb-6">
-                Entre em <span className="text-green-400">Contato</span>
+                Entre em <span className="text-green-400">contato</span>
               </h2>
               <p className="text-xl text-gray-300">
-                Tem dúvidas sobre o plano Enterprise? Nossa equipe está pronta para ajudar.
+                Tem dúvidas sobre o plano enterprise? Nossa equipe está pronta para ajudar.
               </p>
             </div>
           </FadeIn>
@@ -837,11 +843,11 @@ export default function LandingPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 px-6 bg-gradient-to-r from-green-600 to-green-500 relative overflow-hidden mb-12 md:mb-24">
+      <section className="py-28 px-4 sm:px-8 md:px-16 bg-gradient-to-r from-green-600 to-green-500 relative overflow-hidden mb-20 md:mb-32">
         <div className="absolute inset-0 bg-black/20"></div>
         <FadeIn>
           <div className="max-w-4xl mx-auto text-center relative z-10">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">Pronto para Revolucionar seu Negócio?</h2>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">Pronto para revolucionar seu negócio?</h2>
             <p className="text-xl mb-8 opacity-90">
               Junte-se a milhares de personal trainers que já transformaram suas carreiras
             </p>
@@ -875,7 +881,7 @@ export default function LandingPage() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 py-12 px-6 mt-12 md:mt-24">
+      <footer className="bg-gray-900 py-16 px-4 sm:px-8 md:px-16 mt-20 md:mt-32">
         <div className="max-w-7xl mx-auto">
           <StaggerContainer className="grid md:grid-cols-4 gap-8" staggerDelay={100}>
             <div>
