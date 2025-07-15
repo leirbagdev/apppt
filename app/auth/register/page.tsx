@@ -16,6 +16,19 @@ export default function RegisterPage() {
     confirmPassword: "",
     userType: "trainer" as "trainer" | "client",
     acceptTerms: false,
+    phone: "",
+    birth_date: "",
+    emergency_contact: "",
+    emergency_phone: "",
+    height: "",
+    weight: "",
+    objectives: "",
+    experience_level: "",
+    plan: "",
+    frequency: "",
+    start_date: "",
+    payment_method: "",
+    status: "",
   })
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -70,19 +83,19 @@ export default function RegisterPage() {
         const { error: studentError } = await supabase.from("students").insert({
           full_name: formData.name,
           email: formData.email,
-          phone: "",
-          birth_date: new Date().toISOString().slice(0, 10),
-          emergency_contact: formData.name,
-          emergency_phone: "",
-          height: 170,
-          weight: 70,
-          objectives: ["Saúde geral"],
-          experience_level: "iniciante",
-          plan: "basic",
-          frequency: 1,
-          start_date: new Date().toISOString().slice(0, 10),
-          payment_method: "pix",
-          status: "active",
+          phone: formData.phone,
+          birth_date: formData.birth_date || new Date().toISOString().slice(0, 10),
+          emergency_contact: formData.emergency_contact || formData.name,
+          emergency_phone: formData.emergency_phone,
+          height: formData.height ? Number(formData.height) : 170,
+          weight: formData.weight ? Number(formData.weight) : 70,
+          objectives: formData.objectives ? [formData.objectives] : ["Saúde geral"],
+          experience_level: formData.experience_level || "iniciante",
+          plan: formData.plan || "basic",
+          frequency: formData.frequency ? Number(formData.frequency) : 1,
+          start_date: formData.start_date || new Date().toISOString().slice(0, 10),
+          payment_method: formData.payment_method || "pix",
+          status: formData.status || "active",
         })
         insertError = studentError
       }
@@ -256,6 +269,192 @@ export default function RegisterPage() {
               </Link>
             </label>
           </div>
+
+          {/* Campos extras para CLIENTE */}
+          {formData.userType === "client" && (
+            <>
+              <div className="space-y-2">
+                <label htmlFor="phone" className="block text-white text-base font-medium">
+                  Telefone
+                </label>
+                <input
+                  id="phone"
+                  name="phone"
+                  type="text"
+                  value={formData.phone}
+                  onChange={handleInputChange}
+                  placeholder="(99) 99999-9999"
+                  className="w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-2xl text-white placeholder-gray-500"
+                />
+              </div>
+              <div className="space-y-2">
+                <label htmlFor="birth_date" className="block text-white text-base font-medium">
+                  Data de nascimento
+                </label>
+                <input
+                  id="birth_date"
+                  name="birth_date"
+                  type="date"
+                  value={formData.birth_date}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-2xl text-white"
+                />
+              </div>
+              <div className="space-y-2">
+                <label htmlFor="emergency_contact" className="block text-white text-base font-medium">
+                  Contato de emergência
+                </label>
+                <input
+                  id="emergency_contact"
+                  name="emergency_contact"
+                  type="text"
+                  value={formData.emergency_contact}
+                  onChange={handleInputChange}
+                  placeholder="Nome do contato"
+                  className="w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-2xl text-white placeholder-gray-500"
+                />
+              </div>
+              <div className="space-y-2">
+                <label htmlFor="emergency_phone" className="block text-white text-base font-medium">
+                  Telefone de emergência
+                </label>
+                <input
+                  id="emergency_phone"
+                  name="emergency_phone"
+                  type="text"
+                  value={formData.emergency_phone}
+                  onChange={handleInputChange}
+                  placeholder="(99) 99999-9999"
+                  className="w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-2xl text-white placeholder-gray-500"
+                />
+              </div>
+              <div className="space-y-2">
+                <label htmlFor="height" className="block text-white text-base font-medium">
+                  Altura (cm)
+                </label>
+                <input
+                  id="height"
+                  name="height"
+                  type="number"
+                  value={formData.height}
+                  onChange={handleInputChange}
+                  placeholder="170"
+                  className="w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-2xl text-white placeholder-gray-500"
+                />
+              </div>
+              <div className="space-y-2">
+                <label htmlFor="weight" className="block text-white text-base font-medium">
+                  Peso (kg)
+                </label>
+                <input
+                  id="weight"
+                  name="weight"
+                  type="number"
+                  value={formData.weight}
+                  onChange={handleInputChange}
+                  placeholder="70"
+                  className="w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-2xl text-white placeholder-gray-500"
+                />
+              </div>
+              <div className="space-y-2">
+                <label htmlFor="objectives" className="block text-white text-base font-medium">
+                  Objetivo
+                </label>
+                <input
+                  id="objectives"
+                  name="objectives"
+                  type="text"
+                  value={formData.objectives}
+                  onChange={handleInputChange}
+                  placeholder="Saúde geral"
+                  className="w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-2xl text-white placeholder-gray-500"
+                />
+              </div>
+              <div className="space-y-2">
+                <label htmlFor="experience_level" className="block text-white text-base font-medium">
+                  Nível de experiência
+                </label>
+                <input
+                  id="experience_level"
+                  name="experience_level"
+                  type="text"
+                  value={formData.experience_level}
+                  onChange={handleInputChange}
+                  placeholder="iniciante"
+                  className="w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-2xl text-white placeholder-gray-500"
+                />
+              </div>
+              <div className="space-y-2">
+                <label htmlFor="plan" className="block text-white text-base font-medium">
+                  Plano
+                </label>
+                <input
+                  id="plan"
+                  name="plan"
+                  type="text"
+                  value={formData.plan}
+                  onChange={handleInputChange}
+                  placeholder="basic"
+                  className="w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-2xl text-white placeholder-gray-500"
+                />
+              </div>
+              <div className="space-y-2">
+                <label htmlFor="frequency" className="block text-white text-base font-medium">
+                  Frequência semanal
+                </label>
+                <input
+                  id="frequency"
+                  name="frequency"
+                  type="number"
+                  value={formData.frequency}
+                  onChange={handleInputChange}
+                  placeholder="1"
+                  className="w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-2xl text-white placeholder-gray-500"
+                />
+              </div>
+              <div className="space-y-2">
+                <label htmlFor="start_date" className="block text-white text-base font-medium">
+                  Data de início
+                </label>
+                <input
+                  id="start_date"
+                  name="start_date"
+                  type="date"
+                  value={formData.start_date}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-2xl text-white"
+                />
+              </div>
+              <div className="space-y-2">
+                <label htmlFor="payment_method" className="block text-white text-base font-medium">
+                  Forma de pagamento
+                </label>
+                <input
+                  id="payment_method"
+                  name="payment_method"
+                  type="text"
+                  value={formData.payment_method}
+                  onChange={handleInputChange}
+                  placeholder="pix"
+                  className="w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-2xl text-white placeholder-gray-500"
+                />
+              </div>
+              <div className="space-y-2">
+                <label htmlFor="status" className="block text-white text-base font-medium">
+                  Status
+                </label>
+                <input
+                  id="status"
+                  name="status"
+                  type="text"
+                  value={formData.status}
+                  onChange={handleInputChange}
+                  placeholder="active"
+                  className="w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-2xl text-white placeholder-gray-500"
+                />
+              </div>
+            </>
+          )}
 
           {/* Register Button */}
           <button
