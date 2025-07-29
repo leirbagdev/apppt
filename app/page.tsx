@@ -241,9 +241,9 @@ export default function LandingPage() {
       <header className="fixed top-0 w-full bg-black/80 backdrop-blur-md border-b border-gray-800 z-50 transition-all duration-300">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <FadeIn direction="left" delay={100}>
-            <div className="flex items-center space-x-3">
-              <img src="/images/apt-logo.svg" alt="APT" className="w-10 h-10 transition-transform hover:scale-110" />
-            </div>
+            <Link href="#" className="flex items-center space-x-3 focus:outline-none">
+              <img src="/images/apt-logo.svg" alt="APT" className="w-14 h-14 cursor-pointer" />
+            </Link>
           </FadeIn>
 
           <FadeIn direction="down" delay={200}>
@@ -303,7 +303,7 @@ export default function LandingPage() {
         <div className="max-w-7xl mx-auto text-center" style={{ transform: `translateY(${parallaxOffset}px)` }}>
           <FadeIn duration={800}>
             <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white via-green-100 to-green-300 bg-clip-text text-transparent leading-tight md:leading-[1.15]">
-              Apto para treinadores
+              Gerencie seus alunos e impulsione resultados
               <br />
               <span className="text-green-400 animate-pulse">Gestão de forma prática e rápida</span>
             </h1>
@@ -886,7 +886,7 @@ export default function LandingPage() {
           <StaggerContainer className="grid md:grid-cols-4 gap-8" staggerDelay={100}>
             <div>
               <div className="flex items-center space-x-3 mb-4">
-                <img src="/images/apt-logo.svg" alt="APT" className="w-8 h-8 hover:scale-110 transition-transform" />
+                <img src="/images/apt-logo.svg" alt="APT" className="w-12 h-12" />
               </div>
               <p className="text-gray-400">A plataforma mais avançada para personal trainers modernos.</p>
             </div>
